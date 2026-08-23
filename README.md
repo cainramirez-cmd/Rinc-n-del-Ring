@@ -4,7 +4,10 @@
 
 > Diagrama animado de un boxeador frente a una silueta de práctica, fichas técnicas de los 6 golpes de la numeración oficial, variantes tácticas, tablas comparativas y un quiz de reconocimiento visual.
 
-> Ejecutable en Vercel(rincon-del-ring.vercel.app).
+
+## Deploy
+
+Pensado para desplegarse en [Vercel](https://rincon-del-ring.vercel.app/) como sitio estático: importar el repo, sin framework preset, sin build command.
 
 ## Características
 
