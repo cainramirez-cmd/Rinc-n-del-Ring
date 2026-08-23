@@ -4,6 +4,8 @@
 
 > Diagrama animado de un boxeador frente a una silueta de práctica, fichas técnicas de los 6 golpes de la numeración oficial, variantes tácticas, tablas comparativas y un quiz de reconocimiento visual.
 
+> Ejecutable en Vercel(rincon-del-ring.vercel.app).
+
 ## Características
 
 - **Sistema de numeración (1–6):** jab, cross, gancho adelantado, gancho trasero, uppercut adelantado y uppercut trasero, tal como se enseñan y se gritan en cualquier gimnasio.
