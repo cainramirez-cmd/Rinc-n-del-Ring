@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rincón del ring — manual visual de los golpes de boxeo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14100E;
+    --panel:#1E1815;
+    --panel-2:#251D19;
+    --panel-3:#2C231D;
+    --cream:#EDE6D6;
+    --muted:#A79C89;
+    --dim:#786C5C;
+    --red:#C8272C;
+    --red-dark:#8F1A1E;
+    --gold:#C6A15B;
+    --gold-dim:#8C7444;
+    --line:rgba(237,230,214,0.12);
+    --line-strong:rgba(237,230,214,0.22);
+    --font-display:'Anton',sans-serif;
+    --font-eyebrow:'Oswald',sans-serif;
+    --font-body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--cream);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;}
+  a{color:inherit;}
+  ::selection{background:var(--red);color:var(--cream);}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,56px);}
+
+  .eyebrow{
+    font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.14em;
+    font-size:clamp(11px,1.4vw,13px);color:var(--gold);font-weight:500;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--red);display:inline-block;}
+
+  h1,h2,h3{font-family:var(--font-display);font-weight:400;letter-spacing:0.01em;margin:0;text-transform:uppercase;}
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px clamp(20px,5vw,56px) 0;
+    max-width:1120px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .mark{
+    width:34px;height:34px;border-radius:50%;border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-size:15px;color:var(--gold);
+  }
+  .brand .name{font-family:var(--font-eyebrow);letter-spacing:0.1em;text-transform:uppercase;font-size:13.5px;color:var(--cream);}
+  .brand .name b{color:var(--red);}
+  .topbar nav{display:none;font-family:var(--font-eyebrow);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);gap:22px;}
+  @media (min-width:820px){.topbar nav{display:flex;}}
+  .topbar nav a:hover{color:var(--gold);}
+
+  /* ---------- rope divider ---------- */
+  .rope{
+    height:10px;margin:0 auto;max-width:1120px;border-radius:6px;
+    background:repeating-linear-gradient(-35deg,var(--cream) 0px,var(--cream) 6px,var(--red) 6px,var(--red) 12px);
+    opacity:0.85;position:relative;
+  }
+  .rope::before,.rope::after{content:"";position:absolute;top:50%;transform:translateY(-50%);width:16px;height:16px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--ink);}
+  .rope::before{left:-6px;} .rope::after{right:-6px;}
+  .rope-gap{height:clamp(44px,7vw,76px);}
+
+  .round-label{text-align:center;font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);font-size:12px;margin:20px 0 8px;display:flex;align-items:center;justify-content:center;gap:10px;}
+  .round-label b{color:var(--gold);font-weight:600;}
+  .round-label .bell{width:14px;height:14px;opacity:0.6;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:clamp(46px,9vw,86px) 0 clamp(50px,8vw,80px);position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;right:-10%;top:-25%;width:520px;height:520px;border:2px solid var(--line);border-radius:50%;pointer-events:none;}
+  .watermark{
+    position:absolute;left:-40px;bottom:-30px;font-family:var(--font-display);
+    font-size:clamp(90px,16vw,190px);color:transparent;-webkit-text-stroke:1px var(--line-strong);
+    letter-spacing:0.01em;white-space:nowrap;pointer-events:none;user-select:none;line-height:1;
+  }
+  .ticket{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line-strong);padding:6px 14px 6px 10px;border-radius:999px;font-family:var(--font-eyebrow);font-size:12px;letter-spacing:0.08em;color:var(--muted);text-transform:uppercase;margin-bottom:26px;}
+  .ticket .dot{width:7px;height:7px;border-radius:50%;background:var(--red);}
+  .hero h1{font-size:clamp(40px,8vw,84px);line-height:0.95;color:var(--cream);max-width:16ch;position:relative;z-index:1;}
+  .hero h1 span{color:var(--red);}
+  .hero p.lede{font-size:clamp(16px,1.9vw,19px);color:var(--muted);max-width:58ch;margin:26px 0 34px;position:relative;z-index:1;}
+  .hero-facts{display:flex;flex-wrap:wrap;gap:clamp(22px,5vw,44px);padding-top:26px;border-top:1px solid var(--line);position:relative;z-index:1;}
+  .fact b{display:block;font-family:var(--font-display);font-size:clamp(26px,3.2vw,34px);color:var(--gold);font-weight:400;}
+  .fact span{font-family:var(--font-eyebrow);font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+  .cta-scroll{margin-top:36px;display:inline-flex;align-items:center;gap:10px;background:none;border:1px solid var(--line-strong);color:var(--cream);font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.08em;font-size:13px;padding:13px 22px;border-radius:999px;cursor:pointer;transition:border-color .2s, background .2s;position:relative;z-index:1;}
+  .cta-scroll:hover{border-color:var(--red);background:rgba(200,39,44,0.12);}
+
+  section{padding:clamp(46px,8vw,80px) 0;}
+  .section-head{max-width:66ch;margin-bottom:clamp(30px,5vw,46px);}
+  .section-head h2{font-size:clamp(28px,4.6vw,44px);color:var(--cream);margin-top:10px;}
+  .section-head p{color:var(--muted);font-size:15.5px;max-width:62ch;margin-top:14px;}
+
+  .info-note{
+    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);
+    border-radius:0 12px 12px 0;padding:16px 20px;font-size:14px;color:var(--muted);margin-top:26px;max-width:70ch;
+  }
+  .info-note b{color:var(--cream);font-weight:600;}
+
+  /* ---------- stance toggle ---------- */
+  .stance-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:10px;}
+  .stance-toggle{display:inline-flex;border:1px solid var(--line-strong);border-radius:999px;padding:4px;gap:4px;}
+  .stance-toggle button{font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.06em;font-size:12.5px;padding:9px 18px;border-radius:999px;border:none;background:none;color:var(--muted);cursor:pointer;transition:all .2s;}
+  .stance-toggle button.active{background:var(--red);color:var(--cream);}
+  .stance-caption{font-size:13.5px;color:var(--muted);}
+  .stance-caption b{color:var(--gold);font-weight:600;}
+
+  .chain{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .chain-step{
+    display:flex;align-items:center;gap:8px;font-family:var(--font-eyebrow);font-size:12px;
+    text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);
+    border:1px solid var(--line);padding:8px 14px;border-radius:999px;
+  }
+  .chain-step b{color:var(--gold);font-weight:600;}
+  .chain-arrow{color:var(--dim);align-self:center;}
+
+  /* ---------- diagram module ---------- */
+  .lab{display:grid;grid-template-columns:minmax(280px,400px) 1fr;gap:clamp(24px,4vw,48px);align-items:start;}
+  @media (max-width:800px){.lab{grid-template-columns:1fr;}}
+  .diagram-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;}
+  .diagram-card svg{width:100%;height:auto;}
+  .diagram-caption{text-align:center;font-family:var(--font-eyebrow);letter-spacing:0.1em;text-transform:uppercase;font-size:12px;color:var(--muted);margin-top:14px;min-height:16px;}
+  .diagram-caption b{color:var(--gold);}
+  .zone-legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);}
+  .zone-legend div{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);}
+  .zone-legend .sw{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--gold);flex-shrink:0;}
+
+  .mode-tabs{display:flex;gap:6px;margin-bottom:20px;}
+  .mode-tabs button{flex:1;font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.06em;font-size:12.5px;padding:11px 10px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer;transition:all .2s;}
+  .mode-tabs button.active{border-color:var(--gold);color:var(--gold);background:var(--panel-2);}
+
+  .badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px;}
+  .badge{width:52px;height:52px;border-radius:50%;border:2px solid var(--line-strong);background:var(--panel);color:var(--cream);font-family:var(--font-display);font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;flex-shrink:0;}
+  .badge:hover{border-color:var(--gold);}
+  .badge.lead{border-color:rgba(237,230,214,0.4);}
+  .badge.rear{border-color:rgba(200,39,44,0.5);}
+  .badge.selected{background:var(--red);border-color:var(--red);transform:scale(1.06);}
+
+  .detail-panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,3vw,34px);min-height:340px;}
+  .detail-top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px;}
+  .detail-top .num{font-family:var(--font-display);font-size:40px;color:var(--gold);line-height:1;}
+  .detail-top h3{font-size:clamp(24px,3vw,32px);color:var(--cream);}
+  .detail-alias{color:var(--muted);font-size:13.5px;font-style:italic;margin-bottom:8px;}
+  .zone-pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-eyebrow);font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--gold);border:1px solid rgba(198,161,91,0.4);padding:4px 10px;border-radius:999px;margin-bottom:18px;}
+  .detail-desc{font-size:15.5px;color:var(--cream);margin-bottom:22px;max-width:64ch;}
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px;}
+  @media (max-width:600px){.detail-grid{grid-template-columns:1fr;}}
+  .detail-block h4{font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.08em;font-size:12px;color:var(--gold);margin:0 0 8px;}
+  .detail-block ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;}
+  .detail-block ul li{margin-bottom:6px;}
+  .detail-block p{margin:0;color:var(--muted);font-size:14px;}
+  .hand-tag{display:inline-block;font-family:var(--font-eyebrow);text-transform:uppercase;font-size:11px;letter-spacing:0.06em;padding:4px 10px;border-radius:999px;border:1px solid var(--line-strong);color:var(--muted);margin:0 8px 18px 0;}
+
+  /* combo mode */
+  .combo-body{display:none;} .combo-body.active{display:block;}
+  .single-body.hidden{display:none;}
+  .preset-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+  .preset-chip{font-family:var(--font-eyebrow);font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;padding:8px 13px;border-radius:999px;border:1px solid var(--line-strong);background:var(--panel-2);color:var(--muted);cursor:pointer;transition:all .15s;}
+  .preset-chip:hover{border-color:var(--gold);color:var(--gold);}
+  .preset-chip.active{background:var(--gold-dim);border-color:var(--gold-dim);color:var(--ink);}
+  .combo-seq{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:14px;border:1px dashed var(--line-strong);border-radius:12px;margin-bottom:14px;align-items:center;}
+  .combo-seq .chip{width:34px;height:34px;border-radius:50%;background:var(--red);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:15px;}
+  .combo-seq .placeholder{color:var(--muted);font-size:13.5px;font-family:var(--font-body);}
+  .combo-note{font-size:13px;color:var(--muted);min-height:18px;margin-bottom:14px;}
+  .combo-caller{font-family:var(--font-display);font-size:clamp(19px,3vw,26px);color:var(--gold);min-height:34px;margin-bottom:16px;letter-spacing:0.02em;}
+  .combo-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .btn{font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.06em;font-size:12.5px;padding:12px 20px;border-radius:999px;border:1px solid var(--line-strong);background:none;color:var(--cream);cursor:pointer;transition:all .2s;}
+  .btn:hover{border-color:var(--gold);}
+  .btn.primary{background:var(--red);border-color:var(--red);}
+  .btn.primary:hover{background:var(--red-dark);border-color:var(--red-dark);}
+  .btn.ghost{border-color:transparent;color:var(--muted);}
+  .btn:disabled{opacity:0.4;cursor:not-allowed;}
+  .speed-row{display:flex;align-items:center;gap:10px;margin-top:16px;font-family:var(--font-eyebrow);font-size:11.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);}
+  .speed-row .speed-opt{padding:6px 12px;border-radius:999px;border:1px solid var(--line);cursor:pointer;}
+  .speed-row .speed-opt.active{border-color:var(--gold);color:var(--gold);}
+  .combo-legend{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:13px;color:var(--muted);}
+  .combo-legend div b{color:var(--cream);font-weight:600;}
+
+  /* ---------- variant cards ---------- */
+  .variant-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;}
+  .variant-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .2s, transform .2s;}
+  .variant-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+  .variant-card h4{font-family:var(--font-eyebrow);font-size:16px;letter-spacing:0.02em;color:var(--cream);margin:0 0 10px;text-transform:none;font-weight:600;}
+  .variant-card p{font-size:13.5px;color:var(--muted);margin:0 0 10px;}
+  .variant-card .vfoot{font-size:12px;color:var(--gold-dim);border-top:1px solid var(--line);padding-top:10px;margin-top:auto;}
+  .variant-tag{display:inline-block;font-family:var(--font-eyebrow);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(198,161,91,0.4);padding:3px 9px;border-radius:999px;margin-bottom:12px;}
+
+  /* ---------- tables ---------- */
+  .table-wrap{margin-bottom:44px;}
+  .table-wrap h3{font-family:var(--font-eyebrow);text-transform:none;font-size:17px;font-weight:600;letter-spacing:0.02em;color:var(--cream);margin-bottom:4px;}
+  .table-wrap .table-sub{font-size:13px;color:var(--muted);margin-bottom:18px;}
+  .ref-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  .ref-table th,.ref-table td{text-align:left;padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:middle;}
+  .ref-table th{font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.05em;font-size:11px;color:var(--muted);font-weight:500;white-space:nowrap;}
+  .ref-table td.name{color:var(--cream);font-weight:600;white-space:nowrap;}
+  .ref-table td.exp{color:var(--gold-dim);}
+  .meter{width:100%;max-width:110px;height:6px;background:rgba(237,230,214,0.1);border-radius:99px;overflow:hidden;}
+  .meter span{display:block;height:100%;background:var(--gold);}
+  .meter.risk span{background:var(--red);}
+  .table-scroll{overflow-x:auto;}
+  .table-scroll table{min-width:760px;}
+
+  /* ---------- quiz ---------- */
+  .quiz-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:clamp(24px,4vw,40px);align-items:start;}
+  @media (max-width:760px){.quiz-card{grid-template-columns:1fr;}}
+  .quiz-score{font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.08em;font-size:12px;color:var(--muted);margin-bottom:16px;}
+  .quiz-score b{color:var(--gold);}
+  .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media (max-width:420px){.quiz-options{grid-template-columns:1fr;}}
+  .quiz-opt{font-family:var(--font-body);font-size:14.5px;padding:14px 16px;border-radius:10px;border:1px solid var(--line-strong);background:var(--panel-2);color:var(--cream);cursor:pointer;text-align:left;transition:all .15s;}
+  .quiz-opt:hover{border-color:var(--gold);}
+  .quiz-opt.correct{background:rgba(198,161,91,0.18);border-color:var(--gold);color:var(--gold);}
+  .quiz-opt.wrong{background:rgba(200,39,44,0.18);border-color:var(--red);color:#f3a2a5;}
+  .quiz-opt:disabled{cursor:default;}
+  .quiz-feedback{min-height:22px;font-size:14px;margin:16px 0;color:var(--muted);}
+  .quiz-feedback.show-correct{color:var(--gold);}
+  .quiz-feedback.show-wrong{color:#f3a2a5;}
+  .quiz-actions{display:flex;gap:10px;flex-wrap:wrap;}
+
+  footer{padding:clamp(40px,7vw,64px) 0 60px;color:var(--muted);font-size:13.5px;}
+  footer .foot-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:24px;}
+  footer h3{font-size:clamp(24px,3vw,34px);color:var(--cream);max-width:20ch;}
+  footer p.tip{max-width:44ch;}
+  footer .brand{margin-top:24px;opacity:0.7;}
+  .footer-meta{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:24px;padding-top:18px;border-top:1px solid var(--line);}
+  .footer-meta .brand{margin-top:0;}
+  .credits{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;font-family:var(--font-eyebrow);font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);}
+  .credit-sep{color:var(--dim);}
+  .github-link{display:inline-flex;align-items:center;gap:7px;color:var(--cream);text-decoration:none;transition:color .2s;}
+  .github-link:hover{color:var(--gold);}
+  .github-link svg{width:18px;height:18px;flex-shrink:0;}
+  .license{border:1px solid var(--line-strong);padding:4px 9px;border-radius:999px;color:var(--gold);}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="mark">R</span><span class="name">Rincón <b>del ring</b></span></div>
+  <nav>
+    <a href="#round1">Numeración</a>
+    <a href="#round2">Diagrama</a>
+    <a href="#round3">Variantes</a>
+    <a href="#round4">Tablas</a>
+    <a href="#round5">Quiz</a>
+  </nav>
+</div>
+
+<header class="hero">
+  <div class="watermark">RINCÓN DEL RING</div>
+  <div class="wrap">
+    <div class="ticket"><span class="dot"></span>Manual visual del rincón — fundamentos de boxeo</div>
+    <h1>Los golpes que definen el <span>boxeo</span></h1>
+    <p class="lede">Bienvenido al <b style="color:var(--cream)">Rincón del ring</b>: el lugar donde se enseña a identificar cada golpe por su trayectoria, su mecánica y su objetivo real sobre el cuerpo del rival. Un diagrama vivo, fichas técnicas completas y un test para poner a prueba tu ojo.</p>
+    <button class="cta-scroll" onclick="document.getElementById('round1').scrollIntoView()">Entrar al gimnasio ↓</button>
+    <div class="hero-facts">
+      <div class="fact"><b>6</b><span>Golpes de la numeración oficial</span></div>
+      <div class="fact"><b>4</b><span>Zonas de impacto reales</span></div>
+      <div class="fact"><b>10+</b><span>Variantes y golpes especiales</span></div>
+      <div class="fact"><b>8</b><span>Combinaciones de entrenamiento</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="rope"></div>
+
+<section id="round1">
+  <div class="wrap">
+    <div class="round-label"><b>Round 1</b> — la guardia y la numeración</div>
+    <div class="section-head">
+      <div class="eyebrow">Antes de golpear</div>
+      <h2>Todo boxeador habla el mismo idioma</h2>
+      <p>En cualquier gimnasio del mundo, un entrenador grita números, no nombres: "¡uno-dos, tres!". Cada número corresponde siempre al mismo golpe, sin importar el idioma que se hable en el rincón. Esa numeración es la base de todo lo que sigue en esta guía.</p>
+    </div>
+    <div class="stance-row">
+      <div class="stance-toggle">
+        <button id="btn-orthodox" class="active" onclick="setStance('orthodox')">Ortodoxo</button>
+        <button id="btn-southpaw" onclick="setStance('southpaw')">Zurdo (southpaw)</button>
+      </div>
+      <div class="stance-caption" id="stanceCaption"><b>Ortodoxo:</b> el pie y la mano izquierda van adelante; la derecha queda atrás, cerca del mentón.</div>
+    </div>
+    <div class="info-note">
+      <b>La cadena cinética:</b> ningún golpe fuerte nace en el brazo. La potencia viaja desde el suelo hacia el puño: el pie pivota, la rodilla y la cadera rotan, el torso gira y recién ahí el hombro y el brazo transmiten esa fuerza acumulada. Un golpe "solo de brazo" siempre pega más débil.
+    </div>
+    <div class="chain">
+      <span class="chain-step"><b>1</b> Pie de apoyo pivota</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step"><b>2</b> Cadera rota</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step"><b>3</b> Torso y hombro giran</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step"><b>4</b> Brazo y puño impactan</span>
+    </div>
+  </div>
+</section>
+
+<section id="round2" style="padding-top:0;">
+  <div class="wrap">
+    <div class="lab">
+      <div class="diagram-card">
+        <div id="diagramMount"></div>
+        <div class="diagram-caption" id="diagramCaption">Diagrama de rincón: las 6 trayectorias base, siempre visibles</div>
+        <div class="zone-legend">
+          <div><span class="sw"></span>Mentón</div>
+          <div><span class="sw"></span>Sien</div>
+          <div><span class="sw"></span>Plexo solar</div>
+          <div><span class="sw"></span>Hígado</div>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="mode-tabs">
+          <button id="tab-single" class="active" onclick="setMode('single')">Golpe individual</button>
+          <button id="tab-combo" onclick="setMode('combo')">Arma tu combinación</button>
+        </div>
+
+        <div class="badge-row" id="badgeRow"></div>
+
+        <div class="single-body" id="singleBody">
+          <div class="detail-panel" id="detailPanel">
+            <p style="color:var(--muted);font-size:14.5px;">Toca un número del 1 al 6 para ver la ficha técnica de ese golpe y observarlo viajar hasta su zona real de impacto sobre el rival.</p>
+          </div>
+        </div>
+
+        <div class="combo-body" id="comboBody">
+          <div class="detail-panel">
+            <div class="preset-row" id="presetRow"></div>
+            <div class="combo-seq" id="comboSeq"><span class="placeholder">Toca los números para construir tu combinación, o elige una combinación preparada arriba</span></div>
+            <div class="combo-note" id="comboNote">&nbsp;</div>
+            <div class="combo-caller" id="comboCaller">&nbsp;</div>
+            <div class="combo-actions">
+              <button class="btn primary" id="playBtn" onclick="playCombo()">Reproducir combinación</button>
+              <button class="btn" onclick="randomCombo()">Combinación aleatoria</button>
+              <button class="btn ghost" onclick="clearCombo()">Borrar</button>
+            </div>
+            <div class="speed-row">
+              Velocidad:
+              <span class="speed-opt" data-speed="1.6" onclick="setSpeed(this,1.6)">Lenta</span>
+              <span class="speed-opt active" data-speed="1" onclick="setSpeed(this,1)">Normal</span>
+              <span class="speed-opt" data-speed="0.55" onclick="setSpeed(this,0.55)">Rápida</span>
+            </div>
+            <div class="combo-legend">
+              <div><b>1</b> jab · <b>2</b> cross</div>
+              <div><b>3</b> gancho adelantado · <b>4</b> gancho trasero</div>
+              <div><b>5</b> uppercut adelantado</div>
+              <div><b>6</b> uppercut trasero</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section>
+  <div class="wrap">
+    <div class="round-label"><b>Round 2</b> — arsenal ampliado</div>
+    <div class="section-head">
+      <div class="eyebrow">Más allá del uno-dos</div>
+      <h2>Variantes y golpes especiales</h2>
+      <p>Con los 6 golpes base dominados, los boxeadores los adaptan según la distancia, la guardia rival y el momento del combate. Estas son las variantes más enseñadas en un gimnasio, agrupadas por el golpe del que nacen.</p>
+    </div>
+    <div class="variant-grid" id="variantGrid"></div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round4">
+  <div class="wrap">
+    <div class="round-label"><b>Round 3</b> — tablas comparativas</div>
+    <div class="section-head">
+      <div class="eyebrow">Vistazo rápido</div>
+      <h2>Trayectoria, potencia y referentes</h2>
+      <p>Valores relativos, tal como se enseñan en el gimnasio: útiles para comparar golpes entre sí, no mediciones de laboratorio.</p>
+    </div>
+
+    <div class="table-wrap">
+      <h3>Golpes base (1 a 6)</h3>
+      <p class="table-sub">Incluye el boxeador históricamente más asociado a cada golpe como referencia de estilo, no como dueño exclusivo de la técnica.</p>
+      <div class="table-scroll"><table class="ref-table" id="refTable"></table></div>
+    </div>
+
+    <div class="table-wrap">
+      <h3>Variantes y golpes especiales</h3>
+      <p class="table-sub">De qué golpe base nace cada variante, qué la diferencia y en qué momento del combate se usa.</p>
+      <div class="table-scroll"><table class="ref-table" id="variantTable"></table></div>
+    </div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round5">
+  <div class="wrap">
+    <div class="round-label"><b>Round 4</b> — pon a prueba tu ojo</div>
+    <div class="section-head">
+      <div class="eyebrow">Identifica el golpe</div>
+      <h2>¿Reconoces la trayectoria?</h2>
+      <p>Se muestra el diagrama sin nombre. Observa la forma del recorrido, la mano que golpea y la zona donde impacta antes de elegir tu respuesta. Podés repetir la animación las veces que quieras.</p>
+    </div>
+    <div class="quiz-card">
+      <div>
+        <div id="quizDiagramMount"></div>
+        <div class="quiz-actions" style="margin-top:14px;">
+          <button class="btn" onclick="repeatQuizTrajectory()">Repetir trayectoria ↻</button>
+        </div>
+      </div>
+      <div>
+        <div class="quiz-score">Aciertos: <b id="quizScore">0 / 0</b></div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-feedback" id="quizFeedback">&nbsp;</div>
+        <button class="btn primary" id="quizNextBtn" onclick="nextQuizRound()">Siguiente golpe →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rope"></div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <h3>La técnica se aprende viendo, se domina repitiendo</h3>
+    </div>
+    <p class="tip">Esta guía es un punto de partida visual. Para corregir la mecánica real de cada golpe (postura, respiración, protección del mentón) entrena siempre frente a un entrenador o en un gimnasio con supervisión.</p>
+    <div class="footer-meta">
+      <div class="brand">
+        <span class="mark" style="width:26px;height:26px;font-size:12px;">R</span>
+        <span style="font-family:var(--font-eyebrow);letter-spacing:0.1em;text-transform:uppercase;font-size:12px;">Rincón del ring</span>
+      </div>
+      <div class="credits">
+        <span>© Caín N. Ramirez</span>
+        <span class="credit-sep">·</span>
+        <a class="github-link" href="https://github.com/cainramirez-cmd" target="_blank" rel="noopener noreferrer" aria-label="GitHub de Caín N. Ramirez">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 .7a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.74.08-.74 1.2.08 1.84 1.23 1.84 1.23 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.29-1.23 3.29-1.23.65 1.65.24 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.82.58A12 12 0 0 0 12 .7Z"/>
+          </svg>
+          <span>cainramirez-cmd</span>
+        </a>
+        <span class="license">MIT License</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============ DATA ============ */
+
+const PUNCHES = {
+  1:{
+    name:"Jab", alias:"Directo de brazo adelantado · \"1\"", hand:"lead", zone:"Mentón",
+    desc:"Golpe recto lanzado con la mano adelantada, sin apenas rotar el hombro trasero. Es el golpe más lanzado en todo el boxeo.",
+    bio:["Sale del mentón y regresa por el mismo camino, en línea recta.","El hombro adelantado sube y protege el mentón al extender el brazo.","El peso apenas se desplaza; el talón trasero permanece casi plano."],
+    uso:"Medir distancia, cortar el ritmo del rival, abrir camino para combinaciones y sumar puntos.",
+    error:"Bajar la mano trasera al lanzarlo, dejando el mentón expuesto.",
+    defensa:"Parada con el guante trasero o desvío lateral con el antebrazo."
+  },
+  2:{
+    name:"Cross", alias:"Recto trasero, cruzado · \"2\"", hand:"rear", zone:"Mentón",
+    desc:"Golpe recto con la mano trasera, potenciado por la rotación de cadera y el pivote del talón trasero.",
+    bio:["El talón trasero gira hacia adentro, transmitiendo fuerza del suelo al puño.","La cadera y el hombro trasero rotan al unísono.","El mentón queda protegido tras el hombro adelantado durante el giro."],
+    uso:"Golpe de poder principal, ideal justo después de un jab que abre la guardia.",
+    error:"Girar solo el brazo sin activar la cadera y el pie, perdiendo potencia.",
+    defensa:"Esquiva (slip) hacia el lado del jab, o bloqueo alto con el guante trasero."
+  },
+  3:{
+    name:"Gancho adelantado", alias:"Crochet de izquierda (ortodoxo) · \"3\"", hand:"lead", zone:"Sien",
+    desc:"Golpe curvo horizontal con el brazo adelantado, codo flexionado cerca de 90°, que ataca por el costado de la guardia.",
+    bio:["El codo se mantiene fijo en ángulo recto; el brazo actúa como una palanca rígida.","El giro nace del pie y la cadera adelantados, pivotando sobre la punta del pie.","Puede dirigirse a la cabeza o al cuerpo (costillas, hígado)."],
+    uso:"Romper guardias altas y golpear en distancia corta, tras un jab o un cross.",
+    error:"Abrir el codo y perder el ángulo, lo que resta potencia y expone la mandíbula.",
+    defensa:"Bloqueo con el antebrazo trasero pegado a la cabeza, o retroceder de rango."
+  },
+  4:{
+    name:"Gancho trasero", alias:"Crochet de derecha · \"4\"", hand:"rear", zone:"Hígado",
+    desc:"La misma mecánica del gancho adelantado, lanzada con la mano trasera: menos frecuente, pero más potente.",
+    bio:["Rotación amplia de cadera y hombro trasero.","Codo fijo en ángulo, trayectoria curva desde afuera hacia el cuerpo o el mentón.","Requiere que el pie trasero pivote para no perder el equilibrio."],
+    uso:"Golpe sorpresa de gran potencia, útil como cierre de una combinación o para atacar el cuerpo.",
+    error:"Telegrafiar el golpe bajando el hombro antes de lanzarlo.",
+    defensa:"Bloqueo con el codo pegado a las costillas, o cortar distancia hacia adentro."
+  },
+  5:{
+    name:"Uppercut adelantado", alias:"Gancho ascendente de izquierda · \"5\"", hand:"lead", zone:"Plexo solar",
+    desc:"Golpe vertical y corto, lanzado de abajo hacia arriba con el brazo adelantado, ideal a corta distancia.",
+    bio:["Flexión de rodillas para \"cargar\" el golpe antes de soltarlo.","La extensión de piernas y cadera empuja el puño hacia arriba.","El codo apunta al suelo justo antes de salir."],
+    uso:"Muy efectivo contra rivales agachados o pegados al cuerpo; ataca mentón o plexo.",
+    error:"Lanzarlo demasiado amplio, \"desde el cinturón\", lo que lo hace lento y visible.",
+    defensa:"Mantener la distancia, bloqueo bajo con el codo, o esquiva hacia atrás."
+  },
+  6:{
+    name:"Uppercut trasero", alias:"Gancho ascendente de derecha · \"6\"", hand:"rear", zone:"Mentón",
+    desc:"Uppercut lanzado con la mano trasera, generalmente el más potente de los golpes ascendentes.",
+    bio:["Mecánica similar al #5, con mayor rotación de la cadera trasera.","Desplazamiento de peso hacia adelante durante el impacto.","Muy usado en distancia corta, cuerpo a cuerpo."],
+    uso:"Golpe de finalización en corta distancia, típico del infighting.",
+    error:"Perder el equilibrio por exceso de impulso hacia arriba.",
+    defensa:"Controlar la distancia, entrar en clinch, o bloqueo bajo."
+  }
+};
+
+const VARIANTS=[
+  {tag:"Del jab",name:"Jab doble",base:"1 + 1",desc:"Dos jabs consecutivos; el segundo suele ser más rápido y preciso. Ciega la guardia rival antes de soltar el cross.",foot:"Objetivo: mentón · Cuándo: para abrir el camino del golpe 2"},
+  {tag:"Del jab",name:"Jab de cuerpo",base:"1 (bajo)",desc:"El mismo golpe #1, dirigido a las costillas. Exige flexionar las rodillas para bajar el nivel de ataque.",foot:"Objetivo: costillas · Cuándo: para desgastar antes del cierre"},
+  {tag:"Del cross",name:"Overhand derecho",base:"2 (en arco)",desc:"Variante del cross que viaja en arco por encima de la guardia rival; muy útil contra oponentes más bajos.",foot:"Objetivo: mentón/sien · Cuándo: rival agachado o más bajo"},
+  {tag:"Del cross",name:"Cross de contra",base:"2 (contraataque)",desc:"Se lanza justo sobre el jab del rival, aprovechando que su guardia trasera queda momentáneamente baja.",foot:"Objetivo: mentón · Cuándo: al detectar el jab rival"},
+  {tag:"Del gancho",name:"Check hook",base:"3 + pivote",desc:"Gancho adelantado combinado con un pivote lateral del pie trasero, para golpear y salir de ángulo evitando el contraataque.",foot:"Objetivo: sien · Cuándo: para salir de la línea de fuego rival"},
+  {tag:"Del gancho",name:"Gancho al hígado",base:"4 (bajo)",desc:"Gancho trasero dirigido bajo la caja torácica; uno de los golpes de knockout al cuerpo más efectivos del boxeo.",foot:"Objetivo: hígado · Cuándo: en distancia corta, tras bajar la guardia rival"},
+  {tag:"Del uppercut",name:"Bolo punch",base:"5/6 (circular)",desc:"Variante de uppercut con un giro circular de \"cebo\" antes del impacto; más un golpe de exhibición que una herramienta moderna.",foot:"Objetivo: mentón · Cuándo: como amague, poco recomendado en competencia"},
+  {tag:"Del uppercut",name:"Uppercut corto en clinch",base:"5/6 (corto)",desc:"Uppercut de recorrido mínimo, usado a corta distancia cuando no hay espacio para armar el golpe completo.",foot:"Objetivo: plexo/mentón · Cuándo: cuerpo a cuerpo, sin distancia para más"}
+];
+
+const REF=[
+  {n:"1",name:"Jab",traj:"Recta",alcance:90,vel:95,pot:45,riesgo:20,gasto:25,dist:"Larga",exp:"Muhammad Ali"},
+  {n:"2",name:"Cross",traj:"Recta",alcance:75,vel:70,pot:85,riesgo:45,gasto:55,dist:"Media-larga",exp:"Deontay Wilder"},
+  {n:"3",name:"Gancho adelantado",traj:"Curva horizontal",alcance:45,vel:65,pot:80,riesgo:55,gasto:60,dist:"Corta",exp:"Joe Frazier"},
+  {n:"4",name:"Gancho trasero",traj:"Curva horizontal",alcance:45,vel:55,pot:88,riesgo:65,gasto:70,dist:"Corta",exp:"Roberto Durán"},
+  {n:"5",name:"Uppercut adelantado",traj:"Curva vertical",alcance:30,vel:60,pot:75,riesgo:60,gasto:65,dist:"Muy corta",exp:"Mike Tyson"},
+  {n:"6",name:"Uppercut trasero",traj:"Curva vertical",alcance:30,vel:55,pot:90,riesgo:70,gasto:75,dist:"Muy corta",exp:"Julio César Chávez"}
+];
+
+const VAR_TABLE=[
+  {name:"Jab doble",base:"1 + 1",obj:"Mentón",cuando:"Para cegar la guardia antes del 2"},
+  {name:"Jab de cuerpo",base:"1 (bajo)",obj:"Costillas",cuando:"Desgaste a media distancia"},
+  {name:"Overhand derecho",base:"2 (arco)",obj:"Mentón / sien",cuando:"Rival más bajo o agachado"},
+  {name:"Cross de contra",base:"2 (contra)",obj:"Mentón",cuando:"Al leer el jab rival"},
+  {name:"Check hook",base:"3 + pivote",obj:"Sien",cuando:"Salir de ángulo tras golpear"},
+  {name:"Gancho al hígado",base:"4 (bajo)",obj:"Hígado",cuando:"Distancia corta, guardia baja rival"},
+  {name:"Bolo punch",base:"5/6 (circular)",obj:"Mentón",cuando:"Amague, uso limitado en competencia"},
+  {name:"Uppercut en clinch",base:"5/6 (corto)",obj:"Plexo / mentón",cuando:"Cuerpo a cuerpo sin distancia"}
+];
+
+const PRESETS=[
+  {label:"Uno-dos",seq:[1,2],note:"La base de todo: mide con el jab y cierra con el cross."},
+  {label:"Uno-dos-tres",seq:[1,2,3],note:"Clásico de gimnasio: recto, recto y gancho para romper la guardia."},
+  {label:"Doble jab + cross",seq:[1,1,2],note:"Ciega dos veces con el jab antes de soltar la mano de poder."},
+  {label:"Rompe guardia",seq:[1,1,2,3],note:"Combinación larga para desgastar la guardia y cerrar con un gancho."},
+  {label:"Ataque al cuerpo",seq:[1,4,3],note:"Baja al hígado con el gancho trasero y sube a la sien de inmediato."},
+  {label:"Cierre de poder",seq:[2,3,2],note:"Cross, gancho y otro cross: alterna ángulos para no ser previsible."},
+  {label:"Sube y baja",seq:[1,2,5,2],note:"Termina la serie recta con un uppercut corto antes del cross final."},
+  {label:"Combo campeón",seq:[1,2,3,2],note:"La secuencia de exhibición más enseñada en el saco: mide, potencia, ángulo y remate."}
+];
+
+/* ============ SVG DIAGRAM (boxeador + rival con zonas de impacto) ============ */
+
+const HAND_COLOR = {lead:"var(--cream)", rear:"var(--red)"};
+
+const PATHS={
+  1:{d:"M150,118 L357,98", zone:"menton"},
+  2:{d:"M75,108 L357,98", zone:"menton"},
+  3:{d:"M150,118 C210,58 280,48 345,72", zone:"sien"},
+  4:{d:"M75,108 C145,205 300,222 372,185", zone:"higado"},
+  5:{d:"M150,130 C182,192 300,192 360,150", zone:"plexo"},
+  6:{d:"M75,120 C132,212 300,140 357,98", zone:"menton"}
+};
+
+const ZONES={
+  menton:{cx:357,cy:98},
+  sien:{cx:345,cy:72},
+  plexo:{cx:360,cy:150},
+  higado:{cx:372,cy:185}
+};
+
+function diagramSVG(idPrefix){
+  let pathEls="";
+  for(const k in PATHS){
+    const hand=PUNCHES[k].hand;
+    pathEls += `<path id="${idPrefix}-p${k}" d="${PATHS[k].d}" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 7" opacity="0.7" marker-end="url(#${idPrefix}-arrow)"/>`;
+  }
+  let zoneEls="";
+  const zonePos={menton:[357,60],sien:[345,95],plexo:[360,150],higado:[372,195]};
+  for(const z in ZONES){
+    zoneEls += `<circle id="${idPrefix}-zone-${z}" cx="${ZONES[z].cx}" cy="${ZONES[z].cy}" r="7" fill="var(--panel-2)" stroke="var(--gold)" stroke-width="1.5" opacity="0.55"/>`;
+  }
+  return `
+  <svg viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="${idPrefix}-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M1,1 L9,5 L1,9" fill="none" stroke="var(--dim)" stroke-width="1.6" stroke-linecap="round"/>
+      </marker>
+    </defs>
+    <g id="${idPrefix}-mirror">
+      <ellipse cx="112" cy="368" rx="72" ry="8" fill="rgba(0,0,0,0.35)"/>
+
+      <!-- rival (silueta de práctica) -->
+      <path d="M340,102 C333,142 337,182 349,212 L373,212 C385,182 389,142 381,102 Z" fill="var(--panel-2)" fill-opacity="0.4" stroke="var(--line-strong)" stroke-width="1.5" stroke-dasharray="3 4"/>
+      <circle cx="360" cy="80" r="22" fill="var(--panel-2)" fill-opacity="0.4" stroke="var(--line-strong)" stroke-width="1.5" stroke-dasharray="3 4"/>
+      ${zoneEls}
+
+      <!-- piernas -->
+      <path d="M122,248 L142,300 L158,352" fill="none" stroke="var(--panel-3)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M98,248 L80,305 L62,355" fill="none" stroke="var(--panel-3)" stroke-width="15" stroke-linecap="round"/>
+      <rect x="146" y="346" width="26" height="11" rx="5" fill="var(--ink)" stroke="var(--line-strong)"/>
+      <rect x="48" y="349" width="26" height="11" rx="5" fill="var(--ink)" stroke="var(--line-strong)"/>
+
+      <!-- short -->
+      <path d="M90,235 C88,250 92,262 100,270 L120,270 C128,262 132,250 130,235 Z" fill="var(--red-dark)" stroke="var(--line-strong)" stroke-width="1"/>
+      <rect x="88" y="244" width="34" height="5" fill="var(--gold)" opacity="0.8"/>
+
+      <!-- torso -->
+      <path d="M85,102 C77,150 82,205 98,245 L122,245 C138,205 143,150 135,102 Z" fill="var(--panel-2)" stroke="var(--line-strong)" stroke-width="1.5"/>
+      <path d="M110,112 L110,155" stroke="var(--line-strong)" stroke-width="1.5" opacity="0.6"/>
+
+      <!-- brazo trasero (detrás del torso) -->
+      <path d="M90,100 L70,145 L75,108" fill="none" stroke="var(--panel-3)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="75" cy="108" rx="15" ry="13" fill="var(--red)" stroke="var(--ink)" stroke-width="1"/>
+      <circle cx="68" cy="104" r="4" fill="var(--red-dark)"/>
+
+      <!-- cabeza -->
+      <path d="M92,52 C92,40 128,40 128,52 L128,60 L92,60 Z" fill="var(--panel-3)"/>
+      <circle cx="110" cy="68" r="24" fill="var(--panel-2)" stroke="var(--line-strong)" stroke-width="1.5"/>
+      <line x1="110" y1="92" x2="110" y2="102" stroke="var(--panel-3)" stroke-width="9" stroke-linecap="round"/>
+
+      <!-- brazo adelantado (por delante) -->
+      <path d="M130,104 L146,146 L150,118" fill="none" stroke="var(--panel-3)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="150" cy="118" rx="15" ry="13" fill="var(--cream)" stroke="var(--ink)" stroke-width="1"/>
+      <circle cx="157" cy="114" r="4" fill="#cfc6b2"/>
+
+      ${pathEls}
+      <circle id="${idPrefix}-fist" cx="150" cy="118" r="9" fill="var(--gold)" opacity="0"/>
+      <g id="${idPrefix}-burst" opacity="0">
+        <path d="M0,-16 L3.5,-3.5 L16,0 L3.5,3.5 L0,16 L-3.5,3.5 L-16,0 L-3.5,-3.5 Z" fill="var(--gold)"/>
+      </g>
+    </g>
+  </svg>`;
+}
+
+document.getElementById('diagramMount').innerHTML = diagramSVG('main');
+document.getElementById('quizDiagramMount').innerHTML = diagramSVG('quiz');
+
+let southpaw=false;
+function setStance(s){
+  southpaw = s==='southpaw';
+  document.getElementById('btn-orthodox').classList.toggle('active', !southpaw);
+  document.getElementById('btn-southpaw').classList.toggle('active', southpaw);
+  document.getElementById('stanceCaption').innerHTML = southpaw
+    ? '<b>Zurdo (southpaw):</b> el pie y la mano derecha van adelante; la izquierda queda atrás, cerca del mentón.'
+    : '<b>Ortodoxo:</b> el pie y la mano izquierda van adelante; la derecha queda atrás, cerca del mentón.';
+  document.querySelectorAll('[id$="-mirror"]').forEach(g=>{
+    g.style.transform = southpaw ? 'scale(-1,1) translate(-440px,0)' : 'none';
+  });
+}
+
+const lastActive={main:null, quiz:null};
+
+function resetPath(prefix,num){
+  const path=document.getElementById(prefix+'-p'+num);
+  if(!path) return;
+  path.setAttribute('stroke','var(--dim)');
+  path.setAttribute('stroke-width','2');
+  path.setAttribute('stroke-dasharray','1 7');
+  path.setAttribute('opacity','0.7');
+  const zone=document.getElementById(prefix+'-zone-'+PATHS[num].zone);
+  if(zone){ zone.setAttribute('opacity','0.55'); zone.setAttribute('fill','var(--panel-2)'); }
+}
+
+function animatePunch(prefix, num, onDone){
+  if(lastActive[prefix] && lastActive[prefix]!=num){ resetPath(prefix, lastActive[prefix]); }
+  lastActive[prefix]=num;
+
+  const path = document.getElementById(prefix+'-p'+num);
+  const fist = document.getElementById(prefix+'-fist');
+  const burst = document.getElementById(prefix+'-burst');
+  const zone = document.getElementById(prefix+'-zone-'+PATHS[num].zone);
+  const len = path.getTotalLength();
+  const hand = PUNCHES[num].hand;
+  const speed = window.comboSpeed || 1;
+  const duration = (num==1?260:num==2?320:(num==3||num==4)?360:400) * speed;
+
+  path.setAttribute('stroke', HAND_COLOR[hand]);
+  path.setAttribute('stroke-width', hand==='lead'?4.5:6);
+  path.setAttribute('stroke-dasharray','none');
+  path.setAttribute('opacity','1');
+
+  const startPt = path.getPointAtLength(0);
+  fist.setAttribute('cx', startPt.x); fist.setAttribute('cy', startPt.y);
+  fist.setAttribute('fill', hand==='lead' ? 'var(--cream)' : 'var(--red)');
+  fist.setAttribute('opacity','1');
+
+  const t0 = performance.now();
+  function frame(now){
+    let t = Math.min(1,(now-t0)/duration);
+    const ease = 1-Math.pow(1-t,3);
+    const pt = path.getPointAtLength(ease*len);
+    fist.setAttribute('cx',pt.x); fist.setAttribute('cy',pt.y);
+    if(t<1){ requestAnimationFrame(frame); }
+    else{
+      burst.setAttribute('cx',pt.x);
+      burst.setAttribute('transform','translate('+pt.x+','+pt.y+') scale(1)');
+      burst.setAttribute('opacity','1');
+      zone.setAttribute('opacity','1');
+      zone.setAttribute('fill','var(--gold)');
+      burst.style.transition='transform .35s ease-out, opacity .4s ease-out .1s';
+      requestAnimationFrame(()=>{ burst.setAttribute('transform','translate('+pt.x+','+pt.y+') scale(1.6)'); });
+      setTimeout(()=>{
+        burst.setAttribute('opacity','0');
+        fist.setAttribute('opacity','0');
+        if(onDone) onDone();
+      },380);
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ============ SELECTOR / DETAIL ============ */
+
+const badgeRow = document.getElementById('badgeRow');
+Object.keys(PUNCHES).forEach(k=>{
+  const b=document.createElement('div');
+  b.className='badge '+PUNCHES[k].hand;
+  b.textContent=k;
+  b.setAttribute('role','button');
+  b.setAttribute('tabindex','0');
+  b.setAttribute('aria-label','Golpe número '+k+': '+PUNCHES[k].name);
+  b.onclick=()=>onBadgeClick(k, b);
+  badgeRow.appendChild(b);
+});
+
+let mode='single';
+let comboSeq=[];
+window.comboSpeed=1;
+
+function setMode(m){
+  mode=m;
+  document.getElementById('tab-single').classList.toggle('active', m==='single');
+  document.getElementById('tab-combo').classList.toggle('active', m==='combo');
+  document.getElementById('singleBody').classList.toggle('hidden', m!=='single');
+  document.getElementById('comboBody').classList.toggle('active', m==='combo');
+  [...badgeRow.children].forEach(b=>b.classList.remove('selected'));
+}
+
+function onBadgeClick(num, el){
+  if(mode==='single'){
+    [...badgeRow.children].forEach(b=>b.classList.remove('selected'));
+    el.classList.add('selected');
+    showDetail(num);
+    document.getElementById('diagramCaption').innerHTML = 'Ejecutando: <b>'+PUNCHES[num].name+'</b> → zona: <b>'+PUNCHES[num].zone+'</b>';
+    animatePunch('main', num, ()=>{
+      document.getElementById('diagramCaption').innerHTML = 'Golpe activo: <b>'+PUNCHES[num].name+' (#'+num+')</b> sobre <b>'+PUNCHES[num].zone+'</b>';
+    });
+  } else {
+    document.querySelectorAll('.preset-chip').forEach(c=>c.classList.remove('active'));
+    document.getElementById('comboNote').innerHTML='&nbsp;';
+    comboSeq.push(parseInt(num));
+    renderComboSeq();
+    animatePunch('main', num);
+  }
+}
+
+function showDetail(num){
+  const p=PUNCHES[num];
+  const panel=document.getElementById('detailPanel');
+  panel.innerHTML = `
+    <span class="hand-tag">${p.hand==='lead'?'Mano adelantada':'Mano trasera'}</span>
+    <span class="zone-pill">Impacta en: ${p.zone}</span>
+    <div class="detail-top"><span class="num">${num}</span><h3>${p.name}</h3></div>
+    <div class="detail-alias">${p.alias}</div>
+    <p class="detail-desc">${p.desc}</p>
+    <div class="detail-grid">
+      <div class="detail-block"><h4>Biomecánica</h4><ul>${p.bio.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="detail-block"><h4>Uso táctico</h4><p>${p.uso}</p></div>
+      <div class="detail-block"><h4>Error común</h4><p>${p.error}</p></div>
+      <div class="detail-block"><h4>Defensa habitual</h4><p>${p.defensa}</p></div>
+    </div>
+  `;
+}
+
+function renderComboSeq(){
+  const box=document.getElementById('comboSeq');
+  box.innerHTML = comboSeq.length===0
+    ? '<span class="placeholder">Toca los números para construir tu combinación, o elige una combinación preparada arriba</span>'
+    : comboSeq.map(n=>`<span class="chip">${n}</span>`).join('');
+}
+
+function clearCombo(){
+  comboSeq=[];
+  renderComboSeq();
+  document.getElementById('comboCaller').innerHTML='&nbsp;';
+  document.getElementById('comboNote').innerHTML='&nbsp;';
+  document.querySelectorAll('.preset-chip').forEach(c=>c.classList.remove('active'));
+}
+
+function randomCombo(){
+  document.querySelectorAll('.preset-chip').forEach(c=>c.classList.remove('active'));
+  const len = 3 + Math.floor(Math.random()*3);
+  const nums = Object.keys(PUNCHES);
+  comboSeq = Array.from({length:len},()=>parseInt(nums[Math.floor(Math.random()*nums.length)]));
+  renderComboSeq();
+  document.getElementById('comboNote').textContent='Combinación aleatoria de entrenamiento: probá reconocerla sin mirar la ficha.';
+}
+
+function setSpeed(el,val){
+  window.comboSpeed=val;
+  document.querySelectorAll('.speed-opt').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function playCombo(){
+  if(comboSeq.length===0) return;
+  const btn=document.getElementById('playBtn');
+  btn.disabled=true;
+  let i=0;
+  const caller=document.getElementById('comboCaller');
+  function step(){
+    if(i>=comboSeq.length){ btn.disabled=false; return; }
+    const num=comboSeq[i];
+    caller.textContent = '¡'+PUNCHES[num].name.toUpperCase()+'!';
+    animatePunch('main', num, ()=>{
+      i++;
+      setTimeout(step, 100*window.comboSpeed);
+    });
+  }
+  step();
+}
+
+const presetRow=document.getElementById('presetRow');
+PRESETS.forEach(p=>{
+  const chip=document.createElement('button');
+  chip.className='preset-chip';
+  chip.textContent=p.label+' ('+p.seq.join('-')+')';
+  chip.onclick=()=>{
+    document.querySelectorAll('.preset-chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    comboSeq=[...p.seq];
+    renderComboSeq();
+    document.getElementById('comboNote').textContent=p.note;
+  };
+  presetRow.appendChild(chip);
+});
+
+setMode('single');
+
+/* ============ VARIANTS ============ */
+
+const vg=document.getElementById('variantGrid');
+VARIANTS.forEach(v=>{
+  const c=document.createElement('div');
+  c.className='variant-card';
+  c.innerHTML=`<span class="variant-tag">${v.tag} · base ${v.base}</span><h4>${v.name}</h4><p>${v.desc}</p><div class="vfoot">${v.foot}</div>`;
+  vg.appendChild(c);
+});
+
+/* ============ TABLES ============ */
+
+function bar(val,cls){return `<div class="meter ${cls||''}"><span style="width:${val}%"></span></div>`;}
+
+document.getElementById('refTable').innerHTML = `
+  <thead><tr>
+    <th>#</th><th>Golpe</th><th>Trayectoria</th><th>Alcance</th><th>Velocidad</th><th>Potencia</th><th>Riesgo al fallar</th><th>Gasto energético</th><th>Distancia ideal</th><th>Exponente histórico</th>
+  </tr></thead>
+  <tbody>
+    ${REF.map(r=>`<tr>
+      <td class="name">${r.n}</td>
+      <td class="name">${r.name}</td>
+      <td>${r.traj}</td>
+      <td>${bar(r.alcance)}</td>
+      <td>${bar(r.vel)}</td>
+      <td>${bar(r.pot)}</td>
+      <td>${bar(r.riesgo,'risk')}</td>
+      <td>${bar(r.gasto,'risk')}</td>
+      <td>${r.dist}</td>
+      <td class="exp">${r.exp}</td>
+    </tr>`).join('')}
+  </tbody>
+`;
+
+document.getElementById('variantTable').innerHTML = `
+  <thead><tr><th>Variante</th><th>Golpe base</th><th>Objetivo</th><th>Cuándo usarla</th></tr></thead>
+  <tbody>
+    ${VAR_TABLE.map(v=>`<tr>
+      <td class="name">${v.name}</td>
+      <td>${v.base}</td>
+      <td>${v.obj}</td>
+      <td>${v.cuando}</td>
+    </tr>`).join('')}
+  </tbody>
+`;
+
+/* ============ QUIZ ============ */
+
+let quizCorrect=0, quizTotal=0, quizCurrent=null, quizAnswered=false;
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+function nextQuizRound(){
+  quizAnswered=false;
+  const nums=Object.keys(PUNCHES);
+  quizCurrent = nums[Math.floor(Math.random()*nums.length)];
+  const others = shuffle(nums.filter(n=>n!==quizCurrent)).slice(0,3);
+  const options = shuffle([quizCurrent, ...others]);
+  const opBox=document.getElementById('quizOptions');
+  opBox.innerHTML='';
+  options.forEach(n=>{
+    const b=document.createElement('button');
+    b.className='quiz-opt';
+    b.textContent=PUNCHES[n].name;
+    b.onclick=()=>answerQuiz(n,b);
+    opBox.appendChild(b);
+  });
+  document.getElementById('quizFeedback').textContent='\u00A0';
+  document.getElementById('quizFeedback').className='quiz-feedback';
+  animatePunch('quiz', quizCurrent);
+}
+
+function repeatQuizTrajectory(){
+  if(!quizCurrent) return;
+  animatePunch('quiz', quizCurrent);
+}
+
+function answerQuiz(num, btn){
+  if(quizAnswered) return;
+  quizAnswered=true;
+  quizTotal++;
+  const feedback=document.getElementById('quizFeedback');
+  const opts=[...document.getElementById('quizOptions').children];
+  if(num===quizCurrent){
+    quizCorrect++;
+    btn.classList.add('correct');
+    feedback.textContent='Correcto: era '+PUNCHES[quizCurrent].name+' (#'+quizCurrent+'), directo a '+PUNCHES[quizCurrent].zone+'.';
+    feedback.className='quiz-feedback show-correct';
+  } else {
+    btn.classList.add('wrong');
+    opts.forEach(o=>{ if(o.textContent===PUNCHES[quizCurrent].name) o.classList.add('correct'); });
+    feedback.textContent='No era esa. La respuesta correcta es '+PUNCHES[quizCurrent].name+' (#'+quizCurrent+'), hacia '+PUNCHES[quizCurrent].zone+'.';
+    feedback.className='quiz-feedback show-wrong';
+  }
+  opts.forEach(o=>o.disabled=true);
+  document.getElementById('quizScore').textContent = quizCorrect+' / '+quizTotal;
+}
+
+nextQuizRound();
+</script>
+</body>
+</html>
