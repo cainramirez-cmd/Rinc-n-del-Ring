@@ -33,9 +33,19 @@
     background:var(--ink);
     color:var(--cream);
     font-family:var(--font-body);
-    line-height:1.6;
+    line-height:1.65;
     -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(ellipse 90% 55% at 50% -8%, rgba(198,161,91,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 40% at 80% 100%, rgba(200,39,44,0.05) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 30% at 10% 80%, rgba(198,161,91,0.04) 0%, transparent 45%);
   }
+  body::before{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(ellipse 100% 100% at 50% 50%, transparent 55%, rgba(0,0,0,0.45) 100%);
+  }
+  body > *{position:relative;z-index:1;}
   img,svg{display:block;}
   a{color:inherit;}
   ::selection{background:var(--red);color:var(--cream);}
@@ -65,7 +75,7 @@
   }
   .brand .name{font-family:var(--font-eyebrow);letter-spacing:0.1em;text-transform:uppercase;font-size:13.5px;color:var(--cream);}
   .brand .name b{color:var(--red);}
-  .topbar nav{display:none;font-family:var(--font-eyebrow);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);gap:22px;}
+  .topbar nav{display:none;font-family:var(--font-eyebrow);font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);gap:14px;flex-wrap:wrap;justify-content:flex-end;max-width:640px;}
   @media (min-width:820px){.topbar nav{display:flex;}}
   .topbar nav a:hover{color:var(--gold);}
 
@@ -201,6 +211,64 @@
   .variant-card .vfoot{font-size:12px;color:var(--gold-dim);border-top:1px solid var(--line);padding-top:10px;margin-top:auto;}
   .variant-tag{display:inline-block;font-family:var(--font-eyebrow);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(198,161,91,0.4);padding:3px 9px;border-radius:999px;margin-bottom:12px;}
 
+  /* ---------- tactics ---------- */
+  .tac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
+  .tac-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;transition:border-color .2s, transform .2s;}
+  .tac-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+  .tac-card .tac-num{font-family:var(--font-display);font-size:26px;color:var(--red);line-height:1;margin-bottom:10px;}
+  .tac-card h4{font-family:var(--font-eyebrow);font-size:15.5px;letter-spacing:0.02em;color:var(--cream);margin:0 0 10px;text-transform:none;font-weight:600;}
+  .tac-card p{font-size:13.5px;color:var(--muted);margin:0;}
+
+  .range-track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  @media (max-width:760px){.range-track{grid-template-columns:1fr;}}
+  .range-step{padding:22px 20px;border-right:1px solid var(--line);background:var(--panel);position:relative;}
+  .range-step:last-child{border-right:none;}
+  @media (max-width:760px){.range-step{border-right:none;border-bottom:1px solid var(--line);} .range-step:last-child{border-bottom:none;}}
+  .range-step .rs-label{font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.08em;font-size:11px;color:var(--gold);margin-bottom:8px;}
+  .range-step h4{font-family:var(--font-eyebrow);text-transform:none;font-weight:600;font-size:15px;color:var(--cream);margin:0 0 8px;}
+  .range-step p{font-size:13px;color:var(--muted);margin:0;}
+  .range-step .rs-bar{position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold-dim);}
+  .range-step:nth-child(1) .rs-bar{background:#5b6b7a;}
+  .range-step:nth-child(2) .rs-bar{background:var(--gold-dim);}
+  .range-step:nth-child(3) .rs-bar{background:var(--gold);}
+  .range-step:nth-child(4) .rs-bar{background:var(--red);}
+
+  .style-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;}
+  .style-card{background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:22px;}
+  .style-card h4{font-family:var(--font-eyebrow);text-transform:none;font-weight:600;font-size:16px;color:var(--gold);margin:0 0 6px;}
+  .style-card .style-alias{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:12px;}
+  .style-card p{font-size:13.5px;color:var(--muted);margin:0 0 10px;}
+  .style-card .style-ref{font-size:12px;color:var(--gold-dim);border-top:1px solid var(--line);padding-top:10px;margin-top:10px;}
+
+  /* ---------- rules ---------- */
+  .rules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;}
+  .rule-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;text-align:center;}
+  .rule-card b{display:block;font-family:var(--font-display);font-size:clamp(24px,3vw,30px);color:var(--gold);font-weight:400;margin-bottom:6px;}
+  .rule-card span.rule-label{font-family:var(--font-eyebrow);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--cream);display:block;margin-bottom:6px;}
+  .rule-card p{font-size:12.5px;color:var(--muted);margin:0;}
+
+  /* ---------- glossary ---------- */
+  .glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);}
+  .gloss-item{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .gloss-item dt{font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.05em;font-size:13px;color:var(--gold);margin:0 0 6px;}
+  .gloss-item dd{margin:0;font-size:13.5px;color:var(--muted);}
+
+  /* ---------- substack CTA ---------- */
+  .substack-card{
+    display:flex;align-items:center;justify-content:space-between;gap:32px;
+    background:linear-gradient(135deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line-strong);border-radius:20px;padding:clamp(28px,4vw,48px);
+  }
+  @media (max-width:760px){.substack-card{flex-direction:column;align-items:flex-start;}}
+  .substack-copy h2{font-size:clamp(24px,3.6vw,36px);color:var(--cream);margin:10px 0 16px;}
+  .substack-copy p{color:var(--muted);font-size:15px;max-width:60ch;margin:0 0 18px;}
+  .substack-points{margin:0 0 24px;padding-left:18px;color:var(--muted);font-size:14px;}
+  .substack-points li{margin-bottom:6px;}
+  .substack-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .substack-actions a{text-decoration:none;display:inline-flex;align-items:center;}
+  .substack-mark{flex-shrink:0;opacity:0.9;}
+  @media (max-width:760px){.substack-mark{display:none;}}
+
   /* ---------- tables ---------- */
   .table-wrap{margin-bottom:44px;}
   .table-wrap h3{font-family:var(--font-eyebrow);text-transform:none;font-size:17px;font-weight:600;letter-spacing:0.02em;color:var(--cream);margin-bottom:4px;}
@@ -247,6 +315,104 @@
   .github-link svg{width:18px;height:18px;flex-shrink:0;}
   .license{border:1px solid var(--line-strong);padding:4px 9px;border-radius:999px;color:var(--gold);}
 
+  /* ---------- scenarios / what would you do ---------- */
+  .scenario-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:clamp(22px,3vw,32px);margin-bottom:18px;
+  }
+  .scenario-card h4{font-family:var(--font-eyebrow);font-size:15px;font-weight:600;text-transform:none;letter-spacing:0.02em;color:var(--cream);margin:0 0 8px;}
+  .scenario-setup{font-size:14.5px;color:var(--muted);margin:0 0 16px;max-width:70ch;}
+  .scenario-opts{display:grid;gap:10px;}
+  .scenario-opt{
+    text-align:left;font-family:var(--font-body);font-size:14px;padding:12px 16px;
+    border-radius:10px;border:1px solid var(--line-strong);background:var(--panel-2);
+    color:var(--cream);cursor:pointer;transition:all .15s;
+  }
+  .scenario-opt:hover{border-color:var(--gold);}
+  .scenario-opt.chosen-good{border-color:var(--gold);background:rgba(198,161,91,0.15);color:var(--gold);}
+  .scenario-opt.chosen-bad{border-color:var(--red);background:rgba(200,39,44,0.12);color:#f3a2a5;}
+  .scenario-opt:disabled{cursor:default;}
+  .scenario-fb{font-size:13.5px;color:var(--muted);margin-top:14px;min-height:1.4em;padding-top:10px;border-top:1px solid transparent;}
+  .scenario-fb.show{border-top-color:var(--line);color:var(--cream);}
+
+  /* ---------- coach cues ---------- */
+  .coach-box{
+    background:var(--panel-2);border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;margin-top:18px;
+  }
+  .coach-box h4{font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.08em;font-size:11px;color:var(--gold);margin:0 0 8px;}
+  .coach-box ul{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px;}
+  .coach-box li{margin-bottom:5px;}
+  .coach-box li b{color:var(--cream);font-weight:600;}
+
+  /* ---------- zone science ---------- */
+  .zone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+  .zone-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;
+  }
+  .zone-card .zone-name{font-family:var(--font-eyebrow);text-transform:uppercase;letter-spacing:0.06em;font-size:12px;color:var(--gold);margin-bottom:6px;}
+  .zone-card h4{font-family:var(--font-eyebrow);font-size:16px;font-weight:600;text-transform:none;color:var(--cream);margin:0 0 10px;}
+  .zone-card p{font-size:13.5px;color:var(--muted);margin:0 0 8px;}
+  .zone-card .zone-sci{font-size:12.5px;color:var(--dim);border-top:1px solid var(--line);padding-top:10px;margin-top:10px;}
+
+  /* ---------- fight study ---------- */
+  .fight-list{display:grid;gap:0;border-top:1px solid var(--line);}
+  .fight-item{
+    display:grid;grid-template-columns:minmax(140px,180px) 1fr;gap:16px;
+    padding:18px 0;border-bottom:1px solid var(--line);align-items:start;
+  }
+  @media (max-width:560px){.fight-item{grid-template-columns:1fr;gap:6px;}}
+  .fight-item .fight-names{font-family:var(--font-eyebrow);font-size:14px;font-weight:600;color:var(--cream);letter-spacing:0.02em;}
+  .fight-item .fight-meta{font-size:12px;color:var(--gold-dim);margin-top:2px;}
+  .fight-item .fight-why{font-size:13.5px;color:var(--muted);margin:0;}
+
+  /* ---------- bio / body section ---------- */
+  .bio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;}
+  .bio-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;
+  }
+  .bio-card h4{font-family:var(--font-eyebrow);font-size:15.5px;font-weight:600;text-transform:none;color:var(--gold);margin:0 0 10px;}
+  .bio-card p{font-size:13.5px;color:var(--muted);margin:0;}
+
+  /* ---------- referent modal ---------- */
+  .ref-modal-bg{
+    position:fixed;inset:0;background:rgba(10,8,6,0.82);z-index:100;
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    opacity:0;pointer-events:none;transition:opacity .2s;
+  }
+  .ref-modal-bg.open{opacity:1;pointer-events:auto;}
+  .ref-modal{
+    background:var(--panel);border:1px solid var(--line-strong);border-radius:16px;
+    padding:28px 28px 24px;max-width:420px;width:100%;position:relative;
+    transform:translateY(8px);transition:transform .2s;
+  }
+  .ref-modal-bg.open .ref-modal{transform:translateY(0);}
+  .ref-modal .ref-close{
+    position:absolute;top:14px;right:16px;background:none;border:none;
+    color:var(--muted);font-size:22px;cursor:pointer;line-height:1;
+  }
+  .ref-modal .ref-close:hover{color:var(--cream);}
+  .ref-modal .ref-tag{font-family:var(--font-eyebrow);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .ref-modal h3{font-size:24px;color:var(--cream);margin:0 0 12px;text-transform:none;letter-spacing:0;}
+  .ref-modal p{font-size:14px;color:var(--muted);margin:0 0 10px;}
+  .ref-modal .ref-fight{font-size:13px;color:var(--gold-dim);border-top:1px solid var(--line);padding-top:12px;margin-top:12px;}
+
+  .ref-link{
+    color:var(--gold);cursor:pointer;text-decoration:underline;text-decoration-color:rgba(198,161,91,0.35);
+    text-underline-offset:2px;transition:color .15s;
+  }
+  .ref-link:hover{color:var(--cream);text-decoration-color:var(--gold);}
+
+  /* ---------- amateur/pro split ---------- */
+  .split-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:700px){.split-grid{grid-template-columns:1fr;}}
+  .split-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;
+  }
+  .split-card h4{font-family:var(--font-eyebrow);font-size:16px;font-weight:600;text-transform:none;color:var(--gold);margin:0 0 12px;}
+  .split-card ul{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px;}
+  .split-card li{margin-bottom:7px;}
+
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
     *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
@@ -261,23 +427,34 @@
     <a href="#round1">Numeración</a>
     <a href="#round2">Diagrama</a>
     <a href="#round3">Variantes</a>
-    <a href="#round4">Tablas</a>
-    <a href="#round5">Quiz</a>
+    <a href="#round4">Defensa</a>
+    <a href="#round5">Táctica</a>
+    <a href="#round5b">¿Qué harías?</a>
+    <a href="#round5c">El cuerpo</a>
+    <a href="#round6">Escuelas</a>
+    <a href="#round7">Arquetipos</a>
+    <a href="#round8">Reglamento</a>
+    <a href="#round9">Tablas</a>
+    <a href="#round10">Glosario</a>
+    <a href="#round11">Quiz</a>
+    <a href="#round12">Estudiar</a>
+    <a href="#substack">Substack</a>
   </nav>
 </div>
 
 <header class="hero">
   <div class="watermark">RINCÓN DEL RING</div>
   <div class="wrap">
-    <div class="ticket"><span class="dot"></span>Manual visual del rincón — fundamentos de boxeo</div>
+    <div class="ticket"><span class="dot"></span>Manual visual del rincón — fundamentos, táctica y cultura del boxeo</div>
     <h1>Los golpes que definen el <span>boxeo</span></h1>
-    <p class="lede">Bienvenido al <b style="color:var(--cream)">Rincón del ring</b>: el lugar donde se enseña a identificar cada golpe por su trayectoria, su mecánica y su objetivo real sobre el cuerpo del rival. Un diagrama vivo, fichas técnicas completas y un test para poner a prueba tu ojo.</p>
+    <p class="lede">Bienvenido al <b style="color:var(--cream)">Rincón del ring</b>: el lugar donde se enseña a identificar cada golpe por su trayectoria, su mecánica y su objetivo real sobre el cuerpo del rival — y también a entender la táctica que decide una pelea antes de que se tire el primer golpe. Como recordaba Ali: «Float like a butterfly, sting like a bee.» La belleza y el veneno van juntos.</p>
     <button class="cta-scroll" onclick="document.getElementById('round1').scrollIntoView()">Entrar al gimnasio ↓</button>
     <div class="hero-facts">
+      <div class="fact"><b>11</b><span>Rounds de contenido</span></div>
       <div class="fact"><b>6</b><span>Golpes de la numeración oficial</span></div>
-      <div class="fact"><b>4</b><span>Zonas de impacto reales</span></div>
-      <div class="fact"><b>10+</b><span>Variantes y golpes especiales</span></div>
-      <div class="fact"><b>8</b><span>Combinaciones de entrenamiento</span></div>
+      <div class="fact"><b>9</b><span>Escuelas y tradiciones regionales</span></div>
+      <div class="fact"><b>8</b><span>Arquetipos de boxeador</span></div>
+      <div class="fact"><b>6</b><span>Técnicas defensivas</span></div>
     </div>
   </div>
 </header>
@@ -300,7 +477,7 @@
       <div class="stance-caption" id="stanceCaption"><b>Ortodoxo:</b> el pie y la mano izquierda van adelante; la derecha queda atrás, cerca del mentón.</div>
     </div>
     <div class="info-note">
-      <b>La cadena cinética:</b> ningún golpe fuerte nace en el brazo. La potencia viaja desde el suelo hacia el puño: el pie pivota, la rodilla y la cadera rotan, el torso gira y recién ahí el hombro y el brazo transmiten esa fuerza acumulada. Un golpe "solo de brazo" siempre pega más débil.
+      <b>La cadena cinética:</b> ningún golpe fuerte nace en el brazo. La potencia viaja desde el suelo hacia el puño: el pie pivota, la rodilla y la cadera rotan, el torso gira y recién ahí el hombro y el brazo transmiten esa fuerza acumulada. Un golpe «solo de brazo» siempre pega más débil. Como resumía Emanuel Steward: «La potencia es un subproducto de la técnica, no un sustituto. Viene del suelo hacia arriba: pies, caderas, hombro, puño. En ese orden.»
     </div>
     <div class="chain">
       <span class="chain-step"><b>1</b> Pie de apoyo pivota</span>
@@ -310,6 +487,12 @@
       <span class="chain-step"><b>3</b> Torso y hombro giran</span>
       <span class="chain-arrow">→</span>
       <span class="chain-step"><b>4</b> Brazo y puño impactan</span>
+    </div>
+
+    <div class="rules-grid" id="guardChecklist" style="margin-top:clamp(34px,5vw,50px);"></div>
+
+    <div class="info-note">
+      <b>Ortodoxo contra zurdo:</b> cuando ambos boxeadores comparten guardia, el pie adelantado de uno queda por fuera del pie adelantado del otro, lo que favorece los golpes rectos. En un cruce ortodoxo-southpaw, los pies delanteros quedan alineados por dentro, lo que abre ángulos distintos y suele favorecer al que controla mejor la posición del pie adelantado fuera de la línea del rival. Los entrenadores insisten: «quien gana el pie delantero, gana el ángulo».
     </div>
   </div>
 </section>
@@ -375,9 +558,9 @@
 <div class="rope-gap"></div>
 <div class="rope"></div>
 
-<section>
+<section id="round3">
   <div class="wrap">
-    <div class="round-label"><b>Round 2</b> — arsenal ampliado</div>
+    <div class="round-label"><b>Round 3</b> — arsenal ampliado</div>
     <div class="section-head">
       <div class="eyebrow">Más allá del uno-dos</div>
       <h2>Variantes y golpes especiales</h2>
@@ -392,7 +575,204 @@
 
 <section id="round4">
   <div class="wrap">
-    <div class="round-label"><b>Round 3</b> — tablas comparativas</div>
+    <div class="round-label"><b>Round 4</b> — la otra mitad del boxeo</div>
+    <div class="section-head">
+      <div class="eyebrow">No golpear también es boxear</div>
+      <h2>Defensa: las seis formas de no ser golpeado</h2>
+      <p>Los boxeadores que más duran arriba del ring no son los que más pegan: son los que menos reciben. La defensa no es solo taparse; es una herramienta ofensiva, porque cada esquiva bien hecha deja al rival expuesto para el contragolpe.</p>
+    </div>
+    <div class="tac-grid" id="defenseGrid"></div>
+    <div class="info-note">
+      <b>La jerarquía defensiva:</b> en el gimnasio se enseña un orden de preferencia. Primero evitar el golpe sin contacto (esquiva, distancia, movimiento de cabeza); si no se puede, bloquear o parar con los guantes y antebrazos; recién como último recurso, absorber el golpe con la guardia alta. Recibir de lleno es siempre la peor opción disponible. Cus D'Amato lo formulaba así: el héroe y el cobarde sienten el mismo miedo; la diferencia es lo que hacen con él. En el ring, eso se traduce en movimiento de cabeza antes de que el golpe salga.
+    </div>
+
+    <div class="table-wrap" style="margin-top:clamp(34px,5vw,50px);">
+      <h3>Golpe rival → respuesta recomendada</h3>
+      <p class="table-sub">Una guía rápida de qué defensa conviene según el golpe que viene, y qué contragolpe habilita cada una.</p>
+      <div class="table-scroll"><table class="ref-table" id="defenseTable"></table></div>
+    </div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round5">
+  <div class="wrap">
+    <div class="round-label"><b>Round 5</b> — táctica boxística</div>
+    <div class="section-head">
+      <div class="eyebrow">Pensar arriba del ring</div>
+      <h2>Golpear bien no alcanza: hay que pelear bien</h2>
+      <p>Conocer los golpes es el alfabeto. La táctica es la gramática: cuándo entrar, cuándo salir, qué distancia mantener y cómo leer al rival antes de que él te lea a vos. Estos son los pilares que separan a quien "tira golpes" de quien realmente boxea.</p>
+    </div>
+
+    <div class="tac-grid" id="tacticsGrid"></div>
+
+    <div class="section-head" style="margin-top:clamp(46px,7vw,72px);">
+      <div class="eyebrow">Los cuatro rangos</div>
+      <h2>Control de la distancia</h2>
+      <p>El boxeo se gana y se pierde en centímetros. Cada rango habilita ciertos golpes y prohíbe otros; moverse entre ellos con intención, y no por accidente, es la habilidad más subestimada del deporte.</p>
+    </div>
+    <div class="range-track" id="rangeTrack"></div>
+
+    <div class="section-head" style="margin-top:clamp(46px,7vw,72px);">
+      <div class="eyebrow">Un plan de pelea no es estático</div>
+      <h2>Las fases del combate</h2>
+      <p>La misma pelea pide cosas distintas según el round. Un boxeador con buena esquina ajusta su plan en cada intervalo, en lugar de repetir la misma receta durante doce rounds.</p>
+    </div>
+    <div class="style-grid" id="phaseGrid"></div>
+
+    <div class="info-note" style="margin-top:clamp(34px,5vw,50px);">
+      <b>Nota del rincón:</b> ninguna de estas ideas reemplaza horas de guantes y espejo. La táctica se entiende leyendo y viendo pelea; se aprende a ejecutar solo sudando en el gimnasio. Como decía Mike Tyson: «Everyone has a plan until they get punched in the mouth.» El plan se prueba bajo fuego, no en el cuaderno.
+    </div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round5b">
+  <div class="wrap">
+    <div class="round-label"><b>Round 5B</b> — decisión bajo fuego</div>
+    <div class="section-head">
+      <div class="eyebrow">Sin tiempo para el manual</div>
+      <h2>¿Qué harías?</h2>
+      <p>Escenarios de ring. Elegí una opción; después leé por qué funciona o por qué no. No hay una sola respuesta correcta en todos los casos, pero sí hay lecturas que los entrenadores repiten.</p>
+    </div>
+    <div id="scenarioMount"></div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round5c">
+  <div class="wrap">
+    <div class="round-label"><b>Round 5C</b> — lo que pasa adentro</div>
+    <div class="section-head">
+      <div class="eyebrow">No es magia: es anatomía y física</div>
+      <h2>Por qué un golpe para o no</h2>
+      <p>El nocaut, el «aire» perdido y el hígado que dobla las rodillas no son misterio de gimnasio: tienen explicación en huesos, nervios y órganos. Entender la zona ayuda a elegir el objetivo y a protegerse.</p>
+    </div>
+    <div class="zone-grid" id="zoneGrid"></div>
+
+    <div class="section-head" style="margin-top:clamp(46px,7vw,72px);">
+      <div class="eyebrow">El cuerpo bajo doce rounds</div>
+      <h2>Lo que el ring le pide al organismo</h2>
+      <p>Más allá del impacto puntual: fatiga, visión, equilibrio y la diferencia entre potencia y resistencia.</p>
+    </div>
+    <div class="bio-grid" id="bioGrid"></div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round6">
+  <div class="wrap">
+    <div class="round-label"><b>Round 6</b> — geografía del boxeo</div>
+    <div class="section-head">
+      <div class="eyebrow">Cada tradición, su acento</div>
+      <h2>Escuelas y estilos regionales</h2>
+      <p>El boxeo no se entrena igual en todos lados, y ni siquiera dentro de un mismo país hay una sola forma de hacerlo. Cada tradición desarrolló, durante décadas, una manera propia de pararse, golpear y defenderse — casi un acento reconocible apenas el boxeador se pone en guardia.</p>
+    </div>
+
+    <div class="info-note">
+      <b>Un mito común:</b> se suele decir que el "estilo americano" es el peek-a-boo (guardia cerrada pegada a la cara, popularizado por el entrenador Cus D'Amato). En realidad es apenas una de varias escuelas que conviven en Estados Unidos, y no la mayoritaria: la mayoría de los gimnasios estadounidenses enseña una base ortodoxa más clásica, con variantes regionales muy marcadas según la ciudad y el gimnasio.
+    </div>
+
+    <div class="section-head" style="margin-top:clamp(46px,7vw,72px);">
+      <div class="eyebrow">Un país, varias escuelas</div>
+      <h2>Estados Unidos: tres tradiciones, no una</h2>
+      <p>Cada polo boxístico histórico de Estados Unidos desarrolló su propia identidad, muchas veces asociada a un gimnasio o entrenador puntual más que a un consenso nacional.</p>
+    </div>
+    <div class="style-grid" id="usSchoolGrid"></div>
+
+    <div class="section-head" style="margin-top:clamp(46px,7vw,72px);">
+      <div class="eyebrow">Y el resto del mapa</div>
+      <h2>Otras escuelas y tradiciones</h2>
+      <p>Fuera de Estados Unidos, estas son las tradiciones nacionales más reconocibles y con más influencia en el boxeo mundial.</p>
+    </div>
+    <div class="style-grid" id="schoolGrid"></div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round7">
+  <div class="wrap">
+    <div class="round-label"><b>Round 7</b> — el bestiario del ring</div>
+    <div class="section-head">
+      <div class="eyebrow">Ocho formas de pelear</div>
+      <h2>Arquetipos de boxeador</h2>
+      <p>Ningún boxeador es puramente uno de estos arquetipos, pero casi todos se inclinan hacia alguno. Reconocerlos —en el rival y en uno mismo— es el primer paso para armar un plan de pelea.</p>
+    </div>
+    <div class="style-grid" id="styleGrid"></div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round8">
+  <div class="wrap">
+    <div class="round-label"><b>Round 8</b> — las reglas del juego</div>
+    <div class="section-head">
+      <div class="eyebrow">Antes de subir al ring</div>
+      <h2>Reglamento, pesos y puntuación</h2>
+      <p>Lo que pasa fuera de los golpes también define una pelea: cuánto dura, cómo se puntúa y en qué categoría de peso se disputa.</p>
+    </div>
+
+    <div class="rules-grid" id="rulesGrid"></div>
+
+    <div class="table-wrap" style="margin-top:clamp(34px,5vw,50px);">
+      <h3>Categorías de peso (boxeo profesional)</h3>
+      <p class="table-sub">Límites según las comisiones más reconocidas (WBC, WBA, IBF, WBO). Se indican kg y lbs; hay variaciones menores entre organismos. Valores de alcance, velocidad y potencia son relativos de gimnasio, no de laboratorio.</p>
+      <div class="table-scroll"><table class="ref-table" id="weightTable"></table></div>
+    </div>
+
+    <div class="info-note" style="margin-top:clamp(34px,5vw,50px);">
+      <b>Qué mira un juez:</b> el sistema de puntuación por round (10-point must) evalúa, en orden de peso relativo: 1) golpes limpios y efectivos, 2) agresividad efectiva (no solo avanzar), 3) control de la distancia y el ring, 4) defensa. Un round parejo se puntúa 10-9; una caída o dominio claro puede bajar el marcador a 10-8 o menos. Los jueces no cuentan solo volumen: un jab limpio que controla vale más que un swing que no conecta.
+    </div>
+
+    <div class="section-head" style="margin-top:clamp(40px,6vw,60px);">
+      <div class="eyebrow">Dos deportes con el mismo nombre</div>
+      <h2>Amateur y profesional</h2>
+      <p>Misma numeración de golpes, reglas y prioridades distintas. Quien pasa de uno a otro suele descubrir que el ritmo, el poder y la tolerancia al castigo no se transfieren solos.</p>
+    </div>
+    <div class="split-grid">
+      <div class="split-card">
+        <h4>Amateur / olímpico</h4>
+        <ul>
+          <li>Rounds cortos (típicamente 3 × 3 min en élite masculina).</li>
+          <li>Puntuación centrada en volumen de golpes limpios que conectan.</li>
+          <li>Cabezal en categorías juveniles; guantes y reglamento más protectores.</li>
+          <li>Prioridad: no recibir, sumar puntos, controlar distancia.</li>
+          <li>El nocaut existe pero no define la cultura del entrenamiento como en pro.</li>
+        </ul>
+      </div>
+      <div class="split-card">
+        <h4>Profesional</h4>
+        <ul>
+          <li>Hasta 12 rounds de 3 minutos en títulos mundiales.</li>
+          <li>El desgaste acumulado y el poder de parar pelean con el volumen.</li>
+          <li>Sin cabezal; el cutman y la esquina pesan más entre rounds.</li>
+          <li>Prioridad: daño efectivo, ring generalship, capacidad de cerrar.</li>
+          <li>Un solo golpe puede terminar la noche desde el primer round.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round9">
+  <div class="wrap">
+    <div class="round-label"><b>Round 9</b> — tablas comparativas</div>
+
     <div class="section-head">
       <div class="eyebrow">Vistazo rápido</div>
       <h2>Trayectoria, potencia y referentes</h2>
@@ -401,7 +781,7 @@
 
     <div class="table-wrap">
       <h3>Golpes base (1 a 6)</h3>
-      <p class="table-sub">Incluye el boxeador históricamente más asociado a cada golpe como referencia de estilo, no como dueño exclusivo de la técnica.</p>
+      <p class="table-sub">Valores relativos de gimnasio. Los exponentes listados son referentes históricos de estilo o potencia en ese golpe, no dueños exclusivos de la técnica.</p>
       <div class="table-scroll"><table class="ref-table" id="refTable"></table></div>
     </div>
 
@@ -416,9 +796,24 @@
 <div class="rope-gap"></div>
 <div class="rope"></div>
 
-<section id="round5">
+<section id="round10">
   <div class="wrap">
-    <div class="round-label"><b>Round 4</b> — pon a prueba tu ojo</div>
+    <div class="round-label"><b>Round 10</b> — el idioma del rincón</div>
+    <div class="section-head">
+      <div class="eyebrow">Para entender cualquier transmisión</div>
+      <h2>Glosario del boxeo</h2>
+      <p>Los términos que más se escuchan en un gimnasio o en la transmisión de una pelea, explicados sin vueltas.</p>
+    </div>
+    <div class="glossary-grid" id="glossaryGrid"></div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round11">
+  <div class="wrap">
+    <div class="round-label"><b>Round 11</b> — pon a prueba tu ojo</div>
     <div class="section-head">
       <div class="eyebrow">Identifica el golpe</div>
       <h2>¿Reconoces la trayectoria?</h2>
@@ -441,6 +836,51 @@
   </div>
 </section>
 
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="round12">
+  <div class="wrap">
+    <div class="round-label"><b>Round 12</b> — material de estudio</div>
+    <div class="section-head">
+      <div class="eyebrow">Ver con intención</div>
+      <h2>Peleas para estudiar</h2>
+      <p>No es un ranking de las mejores noches: es una lista de combates donde se ve con claridad un concepto de esta guía. Buscalas por nombre y fecha; mirá con el ojo del round que corresponda.</p>
+    </div>
+    <div class="fight-list" id="fightList"></div>
+    <div class="info-note" style="margin-top:26px;">
+      <b>Cómo usarlas:</b> elegí una pelea, repasá antes el round de la guía que ilustra, y después mirá buscando solo ese detalle (el jab de control, el roll, el trabajo de hígado, el clinch táctico). La segunda vez podés mirar la pelea entera.
+    </div>
+  </div>
+</section>
+
+<div class="rope-gap"></div>
+<div class="rope"></div>
+
+<section id="substack">
+  <div class="wrap">
+    <div class="substack-card">
+      <div class="substack-copy">
+        <div class="eyebrow">Seguí leyendo fuera del ring</div>
+        <h2>El Rincón del Ring también se lee en Substack</h2>
+        <p>Esta guía visual es la puerta de entrada. En <b style="color:var(--cream)">Rincón del Ring</b>, el newsletter homónimo, profundizamos en análisis de peleas, historia del boxeo, perfiles de boxeadores y lectura táctica de combates recientes — todo en texto, sin animaciones, para leer con calma.</p>
+        <ul class="substack-points">
+          <li>Análisis técnico y táctico de peleas recientes y clásicas</li>
+          <li>Perfiles e historia de boxeadores que marcaron una era</li>
+          <li>Notas sobre estilos, escuelas y evolución del deporte</li>
+        </ul>
+        <div class="substack-actions">
+          <a class="btn primary" href="https://rincndelring.substack.com/" target="_blank" rel="noopener noreferrer">Leer Rincón del Ring ↗</a>
+          <a class="btn" href="https://rincndelring.substack.com/subscribe" target="_blank" rel="noopener noreferrer">Suscribirme gratis</a>
+        </div>
+      </div>
+      <div class="substack-mark" aria-hidden="true">
+        <span class="mark" style="width:78px;height:78px;font-size:34px;border-width:3px;">R</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="rope"></div>
 
 <footer>
@@ -448,13 +888,15 @@
     <div class="foot-top">
       <h3>La técnica se aprende viendo, se domina repitiendo</h3>
     </div>
-    <p class="tip">Esta guía es un punto de partida visual. Para corregir la mecánica real de cada golpe (postura, respiración, protección del mentón) entrena siempre frente a un entrenador o en un gimnasio con supervisión.</p>
+    <p class="tip">Esta guía es un punto de partida visual. Para corregir la mecánica real de cada golpe (postura, respiración, protección del mentón) entrena siempre frente a un entrenador o en un gimnasio con supervisión. Para leer análisis y crónica, visitá el <a href="https://rincndelring.substack.com/" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:underline;">newsletter en Substack</a>.</p>
     <div class="footer-meta">
       <div class="brand">
         <span class="mark" style="width:26px;height:26px;font-size:12px;">R</span>
         <span style="font-family:var(--font-eyebrow);letter-spacing:0.1em;text-transform:uppercase;font-size:12px;">Rincón del ring</span>
       </div>
       <div class="credits">
+        <a class="github-link" href="https://rincndelring.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack de Rincón del Ring">Substack ↗</a>
+        <span class="credit-sep">·</span>
         <span>© Caín N. Ramirez</span>
         <span class="credit-sep">·</span>
         <a class="github-link" href="https://github.com/cainramirez-cmd" target="_blank" rel="noopener noreferrer" aria-label="GitHub de Caín N. Ramirez">
@@ -469,89 +911,130 @@
   </div>
 </footer>
 
+<div class="ref-modal-bg" id="refModalBg" onclick="if(event.target===this)closeRefModal()">
+  <div class="ref-modal" role="dialog" aria-modal="true">
+    <button class="ref-close" onclick="closeRefModal()" aria-label="Cerrar">×</button>
+    <div class="ref-tag" id="refModalTag"></div>
+    <h3 id="refModalName"></h3>
+    <p id="refModalBody"></p>
+    <div class="ref-fight" id="refModalFight"></div>
+  </div>
+</div>
+
 <script>
 /* ============ DATA ============ */
+
+const GUARD_CHECK = [
+  {v:"✓", label:"Mentón", d:"Metido y protegido detrás del hombro adelantado, nunca levantado."},
+  {v:"✓", label:"Manos", d:"Ambas cerca de la cara; la trasera nunca abandona el mentón sin motivo."},
+  {v:"✓", label:"Codos", d:"Pegados al torso, cerrando el paso a ganchos y golpes al cuerpo."},
+  {v:"✓", label:"Pies", d:"Separados al ancho de hombros, peso repartido, talón trasero libre para pivotar."},
+  {v:"✓", label:"Rodillas", d:"Ligeramente flexionadas, listas para desplazarse en cualquier dirección."},
+  {v:"✓", label:"Mirada", d:"Fija en el pecho o los hombros del rival, no en sus guantes ni sus ojos."}
+];
 
 const PUNCHES = {
   1:{
     name:"Jab", alias:"Directo de brazo adelantado · \"1\"", hand:"lead", zone:"Mentón",
-    desc:"Golpe recto lanzado con la mano adelantada, sin apenas rotar el hombro trasero. Es el golpe más lanzado en todo el boxeo.",
-    bio:["Sale del mentón y regresa por el mismo camino, en línea recta.","El hombro adelantado sube y protege el mentón al extender el brazo.","El peso apenas se desplaza; el talón trasero permanece casi plano."],
-    uso:"Medir distancia, cortar el ritmo del rival, abrir camino para combinaciones y sumar puntos.",
-    error:"Bajar la mano trasera al lanzarlo, dejando el mentón expuesto.",
-    defensa:"Parada con el guante trasero o desvío lateral con el antebrazo."
+    desc:"Golpe recto lanzado con la mano adelantada, sin apenas rotar el hombro trasero. Es el golpe más lanzado en todo el boxeo y, según muchos entrenadores, el más importante: controla distancia, ritmo y visión del rival.",
+    bio:["Sale del mentón y regresa por el mismo camino, en línea recta, con «snap» (latigazo) al final.","El hombro adelantado sube y protege el mentón al extender el brazo.","El peso apenas se desplaza; el talón trasero permanece casi plano. La potencia nace del empuje sutil del pie delantero y de la extensión completa del codo."],
+    uso:"Medir distancia, cortar el ritmo del rival, abrir camino para combinaciones y sumar puntos. Larry Holmes y Wladimir Klitschko lo usaron como arma de desgaste real, no solo de medición.",
+    error:"Se ve cuando la mano trasera baja del mentón al salir el jab (el mentón queda a la vista un instante). También cuando el puño «empuja» en vez de latigear: el codo no termina de extenderse y el regreso es lento.",
+    defensa:"Parada con el guante trasero o desvío lateral con el antebrazo (parry). Un jab bien leído habilita el cross de contra.",
+    combina:"Es el golpe de entrada casi universal: abre el 2 (cross) y el 3 (gancho adelantado). Lanzado doble, ciega la guardia antes de cualquier golpe de poder. «The right hand can take you around the block, but the jab will take you around the world» —frase clásica del gimnasio.",
+    contra:"Si el rival lo tira mucho y en línea recta, se puede leer y responder con un cross de contra apenas se asoma. Timing > velocidad pura.",
+    coach:["El jab sale y vuelve por el mismo camino; no lo dejes colgado.","Hombro adelantado sube con la extensión: es tu escudo.","No mires el guante: mirá el pecho del rival mientras medís."]
   },
   2:{
     name:"Cross", alias:"Recto trasero, cruzado · \"2\"", hand:"rear", zone:"Mentón",
-    desc:"Golpe recto con la mano trasera, potenciado por la rotación de cadera y el pivote del talón trasero.",
-    bio:["El talón trasero gira hacia adentro, transmitiendo fuerza del suelo al puño.","La cadera y el hombro trasero rotan al unísono.","El mentón queda protegido tras el hombro adelantado durante el giro."],
-    uso:"Golpe de poder principal, ideal justo después de un jab que abre la guardia.",
-    error:"Girar solo el brazo sin activar la cadera y el pie, perdiendo potencia.",
-    defensa:"Esquiva (slip) hacia el lado del jab, o bloqueo alto con el guante trasero."
+    desc:"Golpe recto con la mano trasera, potenciado por la rotación completa de cadera y el pivote del talón trasero. Es el «golpe de poder» principal en la mayoría de las escuelas ortodoxas.",
+    bio:["El talón trasero gira hacia adentro (como aplastar una colilla), transmitiendo fuerza del suelo al puño.","La cadera y el hombro trasero rotan al unísono; el torso actúa como un resorte.","El mentón queda protegido tras el hombro adelantado durante el giro. La cadena cinética completa es la diferencia entre un «brazo solo» y un cross de nocaut."],
+    uso:"Golpe de poder principal, ideal justo después de un jab que abre la guardia. Deontay Wilder y Thomas Hearns lo convirtieron en su firma: largo, seco y definitivo.",
+    error:"Se ve cuando el hombro trasero baja o se carga un instante antes de salir (telegrafía). O cuando solo gira el brazo: el talón no pivota y la cadera queda quieta; el golpe llega flojo y el equilibrio se rompe.",
+    defensa:"Esquiva (slip) hacia el lado del jab, o bloqueo alto con el guante trasero. El slip permite el gancho de contra inmediato.",
+    combina:"Cierra el clásico uno-dos y suele preceder al gancho adelantado (2-3), aprovechando que el rival queda de perfil tras el giro. En escuelas de poder (Kronk) se enseña a «caer» en el golpe con el peso del cuerpo.",
+    contra:"Se telegrafía si el hombro trasero baja antes de salir; ese instante es el mejor momento para un slip seguido de contragolpe. Cus D'Amato insistía: el movimiento de cabeza debe anticipar siempre al golpe.",
+    coach:["Girá el talón como si apagaras una colilla en el piso.","La cadera y el hombro salen juntos; el brazo solo transmite.","Mentón detrás del hombro adelantado durante todo el giro."]
   },
   3:{
     name:"Gancho adelantado", alias:"Crochet de izquierda (ortodoxo) · \"3\"", hand:"lead", zone:"Sien",
-    desc:"Golpe curvo horizontal con el brazo adelantado, codo flexionado cerca de 90°, que ataca por el costado de la guardia.",
-    bio:["El codo se mantiene fijo en ángulo recto; el brazo actúa como una palanca rígida.","El giro nace del pie y la cadera adelantados, pivotando sobre la punta del pie.","Puede dirigirse a la cabeza o al cuerpo (costillas, hígado)."],
-    uso:"Romper guardias altas y golpear en distancia corta, tras un jab o un cross.",
-    error:"Abrir el codo y perder el ángulo, lo que resta potencia y expone la mandíbula.",
-    defensa:"Bloqueo con el antebrazo trasero pegado a la cabeza, o retroceder de rango."
+    desc:"Golpe curvo horizontal con el brazo adelantado, codo flexionado cerca de 90°, que ataca por el costado de la guardia. Joe Frazier lo elevó a arma de leyenda: constante, desde abajo y con malicia.",
+    bio:["El codo se mantiene fijo en ángulo recto; el brazo actúa como una palanca rígida.","El giro nace del pie y la cadera adelantados, pivotando sobre la punta del pie.","Puede dirigirse a la cabeza o al cuerpo (costillas, hígado). La potencia sale de la rotación del torso, no del hombro aislado."],
+    uso:"Romper guardias altas y golpear en distancia corta, tras un jab o un cross. En infighting es casi obligatorio: el recto pierde espacio.",
+    error:"Se ve el «wide hook»: el codo se abre y el golpe se vuelve un swing amplio, lento y previsible. También cuando el pie delantero no pivota: la cadera no carga y el impacto llega de hombro solo.",
+    defensa:"Bloqueo con el antebrazo trasero pegado a la cabeza, o retroceder de rango. El roll (bob and weave) por debajo es la respuesta clásica de los in-fighters.",
+    combina:"Funciona muy bien después del 1-2, cuando el rival ya está pensando en el recto y no espera el ángulo lateral. El check hook (gancho + pivote) permite golpear y salir de la línea de fuego.",
+    contra:"Al ser un golpe curvo y más lento que el jab, deja tiempo para un bloqueo alto seguido de un cross de contra inmediato. Sugar Ray Robinson lo usaba también en retirada, con precisión quirúrgica.",
+    coach:["Codo a 90°: el brazo es una palanca, no un látigo.","Pivotá sobre la punta del pie delantero; la cadera cierra el golpe.","No lo armes desde lejos: el gancho vive en distancia corta."]
   },
   4:{
     name:"Gancho trasero", alias:"Crochet de derecha · \"4\"", hand:"rear", zone:"Hígado",
-    desc:"La misma mecánica del gancho adelantado, lanzada con la mano trasera: menos frecuente, pero más potente.",
-    bio:["Rotación amplia de cadera y hombro trasero.","Codo fijo en ángulo, trayectoria curva desde afuera hacia el cuerpo o el mentón.","Requiere que el pie trasero pivote para no perder el equilibrio."],
-    uso:"Golpe sorpresa de gran potencia, útil como cierre de una combinación o para atacar el cuerpo.",
-    error:"Telegrafiar el golpe bajando el hombro antes de lanzarlo.",
-    defensa:"Bloqueo con el codo pegado a las costillas, o cortar distancia hacia adentro."
+    desc:"La misma mecánica del gancho adelantado, lanzada con la mano trasera: menos frecuente, pero más potente. Cuando apunta al hígado se convierte en uno de los golpes de nocaut al cuerpo más temidos.",
+    bio:["Rotación amplia de cadera y hombro trasero.","Codo fijo en ángulo, trayectoria curva desde afuera hacia el cuerpo o el mentón.","Requiere que el pie trasero pivote para no perder el equilibrio. En el hígado, el ángulo de 45° hacia arriba maximiza el impacto en el órgano."],
+    uso:"Golpe sorpresa de gran potencia, útil como cierre de una combinación o para atacar el cuerpo. Roberto Durán y Julio César Chávez lo usaron para romper rivales round tras round.",
+    error:"Se ve cuando el hombro trasero cae antes de iniciar el arco (aviso claro al rival). O cuando el codo se abre y el golpe viaja en un círculo grande: llega tarde y deja el mentón expuesto al contra.",
+    defensa:"Bloqueo con el codo pegado a las costillas, o cortar distancia hacia adentro (entrar en clinch). El roll bajo el arco es efectivo si hay espacio.",
+    combina:"Suele cerrar series largas (1-1-2-4) o alternar con el gancho adelantado para atacar ambos lados de la guardia. Tras un jab de cuerpo, el hígado queda más expuesto.",
+    contra:"Su recorrido amplio lo hace lento de reacción: un paso atrás corto lo deja fuera de rango y habilita un cross de contra. En distancia corta, el clinch lo neutraliza.",
+    coach:["Al hígado: subí el golpe en 45°, no en horizontal puro.","El pie trasero tiene que pivotar o te quedás plantado y vulnerable.","No lo cargues a la vista: el hombro no baja antes del puño."]
   },
   5:{
     name:"Uppercut adelantado", alias:"Gancho ascendente de izquierda · \"5\"", hand:"lead", zone:"Plexo solar",
-    desc:"Golpe vertical y corto, lanzado de abajo hacia arriba con el brazo adelantado, ideal a corta distancia.",
-    bio:["Flexión de rodillas para \"cargar\" el golpe antes de soltarlo.","La extensión de piernas y cadera empuja el puño hacia arriba.","El codo apunta al suelo justo antes de salir."],
-    uso:"Muy efectivo contra rivales agachados o pegados al cuerpo; ataca mentón o plexo.",
-    error:"Lanzarlo demasiado amplio, \"desde el cinturón\", lo que lo hace lento y visible.",
-    defensa:"Mantener la distancia, bloqueo bajo con el codo, o esquiva hacia atrás."
+    desc:"Golpe vertical y corto, lanzado de abajo hacia arriba con el brazo adelantado, ideal a corta distancia. Mike Tyson lo integró en su sistema peek-a-boo como arma de finalización tras el bob and weave.",
+    bio:["Flexión de rodillas para «cargar» el golpe antes de soltarlo (la potencia sube desde las piernas).","La extensión de piernas y cadera empuja el puño hacia arriba.","El codo apunta al suelo justo antes de salir; el recorrido debe ser corto y compacto, no un «gancho desde el cinturón»."],
+    uso:"Muy efectivo contra rivales agachados o pegados al cuerpo; ataca mentón o plexo. En clinch o tras un roll, es el golpe natural de reaparición.",
+    error:"Se ve cuando el puño arranca desde la cintura con un arco largo: el golpe tarda y el rival lo lee. También cuando al subir se abre la guardia trasera y el mentón queda solo un segundo de más.",
+    defensa:"Mantener la distancia, bloqueo bajo con el codo, o esquiva hacia atrás. El footwork defensivo lo anula antes de que se arme.",
+    combina:"Ideal tras un gancho al hígado (4): el rival baja la guardia por el dolor y el uppercut sube directo al mentón desprotegido. También cierra el 1-2 en distancia media-corta.",
+    contra:"Necesita distancia muy corta para funcionar; salir con footwork defensivo antes de que se cargue lo anula casi por completo. Un pivote lateral deja al lanzador expuesto.",
+    coach:["Codo al piso un instante; después subís en línea corta.","La potencia sale de las piernas que se estiran, no del hombro.","No lo tires si estás a distancia de jab: no llega y te expone."]
   },
   6:{
     name:"Uppercut trasero", alias:"Gancho ascendente de derecha · \"6\"", hand:"rear", zone:"Mentón",
-    desc:"Uppercut lanzado con la mano trasera, generalmente el más potente de los golpes ascendentes.",
-    bio:["Mecánica similar al #5, con mayor rotación de la cadera trasera.","Desplazamiento de peso hacia adelante durante el impacto.","Muy usado en distancia corta, cuerpo a cuerpo."],
-    uso:"Golpe de finalización en corta distancia, típico del infighting.",
-    error:"Perder el equilibrio por exceso de impulso hacia arriba.",
-    defensa:"Controlar la distancia, entrar en clinch, o bloqueo bajo."
+    desc:"Uppercut lanzado con la mano trasera, generalmente el más potente de los golpes ascendentes. En el infighting es el cierre clásico de intercambios cuerpo a cuerpo.",
+    bio:["Mecánica similar al #5, con mayor rotación de la cadera trasera y transferencia de peso.","Desplazamiento de peso hacia adelante durante el impacto.","Muy usado en distancia corta, cuerpo a cuerpo. El «shovel» a 45° mezcla uppercut y gancho para costillas o mentón."],
+    uso:"Golpe de finalización en corta distancia, típico del infighting. Julio César Chávez y muchos mexicanos lo usaban para castigar el cuerpo y subir al mentón.",
+    error:"Se ve cuando el cuerpo se inclina demasiado hacia arriba y adelante: el equilibrio se va y cualquier pivote rival te deja de costado. O cuando se carga con las rodillas de forma exagerada y el golpe se ve venir de lejos.",
+    defensa:"Controlar la distancia, entrar en clinch, o bloqueo bajo. El árbitro suele separar el clinch rápido, pero gana segundos valiosos.",
+    combina:"Es un cierre clásico de combinación (1-2-6) y el golpe favorito para definir intercambios en distancia corta. Tras un roll bajo el gancho rival, reaparece con el 6.",
+    contra:"Compromete el equilibrio del que lo lanza; un pivote lateral inmediato deja al rival expuesto de costado. Timing y distancia son la mejor defensa.",
+    coach:["Corto y desde abajo: no lo conviertas en un elevador lento.","Transferí peso al pie delantero en el impacto, sin volcarte.","Después del golpe, recuperá la guardia antes de buscar el siguiente."]
   }
 };
 
 const VARIANTS=[
   {tag:"Del jab",name:"Jab doble",base:"1 + 1",desc:"Dos jabs consecutivos; el segundo suele ser más rápido y preciso. Ciega la guardia rival antes de soltar el cross.",foot:"Objetivo: mentón · Cuándo: para abrir el camino del golpe 2"},
   {tag:"Del jab",name:"Jab de cuerpo",base:"1 (bajo)",desc:"El mismo golpe #1, dirigido a las costillas. Exige flexionar las rodillas para bajar el nivel de ataque.",foot:"Objetivo: costillas · Cuándo: para desgastar antes del cierre"},
+  {tag:"Del jab",name:"Jab de salida (push jab)",base:"1 (empuje)",desc:"Jab corto y sin potencia, casi un empujón, usado para frenar el avance del rival y ganar espacio sin comprometerse.",foot:"Objetivo: mentón/pecho · Cuándo: para crear distancia de emergencia"},
   {tag:"Del cross",name:"Overhand derecho",base:"2 (en arco)",desc:"Variante del cross que viaja en arco por encima de la guardia rival; muy útil contra oponentes más bajos.",foot:"Objetivo: mentón/sien · Cuándo: rival agachado o más bajo"},
   {tag:"Del cross",name:"Cross de contra",base:"2 (contraataque)",desc:"Se lanza justo sobre el jab del rival, aprovechando que su guardia trasera queda momentáneamente baja.",foot:"Objetivo: mentón · Cuándo: al detectar el jab rival"},
   {tag:"Del gancho",name:"Check hook",base:"3 + pivote",desc:"Gancho adelantado combinado con un pivote lateral del pie trasero, para golpear y salir de ángulo evitando el contraataque.",foot:"Objetivo: sien · Cuándo: para salir de la línea de fuego rival"},
   {tag:"Del gancho",name:"Gancho al hígado",base:"4 (bajo)",desc:"Gancho trasero dirigido bajo la caja torácica; uno de los golpes de knockout al cuerpo más efectivos del boxeo.",foot:"Objetivo: hígado · Cuándo: en distancia corta, tras bajar la guardia rival"},
+  {tag:"Del gancho",name:"Shovel hook",base:"3/4 (45°)",desc:"Híbrido entre gancho y uppercut, lanzado a 45 grados hacia las costillas o el mentón; corto, difícil de leer y muy potente en distancia corta.",foot:"Objetivo: costillas/mentón · Cuándo: en clinch o distancia muy corta"},
   {tag:"Del uppercut",name:"Bolo punch",base:"5/6 (circular)",desc:"Variante de uppercut con un giro circular de \"cebo\" antes del impacto; más un golpe de exhibición que una herramienta moderna.",foot:"Objetivo: mentón · Cuándo: como amague, poco recomendado en competencia"},
   {tag:"Del uppercut",name:"Uppercut corto en clinch",base:"5/6 (corto)",desc:"Uppercut de recorrido mínimo, usado a corta distancia cuando no hay espacio para armar el golpe completo.",foot:"Objetivo: plexo/mentón · Cuándo: cuerpo a cuerpo, sin distancia para más"}
 ];
 
 const REF=[
-  {n:"1",name:"Jab",traj:"Recta",alcance:90,vel:95,pot:45,riesgo:20,gasto:25,dist:"Larga",exp:"Muhammad Ali"},
-  {n:"2",name:"Cross",traj:"Recta",alcance:75,vel:70,pot:85,riesgo:45,gasto:55,dist:"Media-larga",exp:"Deontay Wilder"},
-  {n:"3",name:"Gancho adelantado",traj:"Curva horizontal",alcance:45,vel:65,pot:80,riesgo:55,gasto:60,dist:"Corta",exp:"Joe Frazier"},
-  {n:"4",name:"Gancho trasero",traj:"Curva horizontal",alcance:45,vel:55,pot:88,riesgo:65,gasto:70,dist:"Corta",exp:"Roberto Durán"},
-  {n:"5",name:"Uppercut adelantado",traj:"Curva vertical",alcance:30,vel:60,pot:75,riesgo:60,gasto:65,dist:"Muy corta",exp:"Mike Tyson"},
-  {n:"6",name:"Uppercut trasero",traj:"Curva vertical",alcance:30,vel:55,pot:90,riesgo:70,gasto:75,dist:"Muy corta",exp:"Julio César Chávez"}
+  {n:"1",name:"Jab",traj:"Recta",alcance:90,vel:95,pot:45,riesgo:20,gasto:25,dist:"Larga",exp:"Muhammad Ali · Larry Holmes · Wladimir Klitschko"},
+  {n:"2",name:"Cross",traj:"Recta",alcance:75,vel:70,pot:85,riesgo:45,gasto:55,dist:"Media-larga",exp:"Deontay Wilder · Thomas Hearns · Sugar Ray Leonard"},
+  {n:"3",name:"Gancho adelantado",traj:"Curva horizontal",alcance:45,vel:65,pot:80,riesgo:55,gasto:60,dist:"Corta",exp:"Joe Frazier · Sugar Ray Robinson · Mike Tyson"},
+  {n:"4",name:"Gancho trasero",traj:"Curva horizontal",alcance:45,vel:55,pot:88,riesgo:65,gasto:70,dist:"Corta",exp:"Roberto Durán · Julio César Chávez · Roy Jones Jr."},
+  {n:"5",name:"Uppercut adelantado",traj:"Curva vertical",alcance:30,vel:60,pot:75,riesgo:60,gasto:65,dist:"Muy corta",exp:"Mike Tyson · Juan Manuel Márquez · Rocky Marciano"},
+  {n:"6",name:"Uppercut trasero",traj:"Curva vertical",alcance:30,vel:55,pot:90,riesgo:70,gasto:75,dist:"Muy corta",exp:"Julio César Chávez · George Foreman · Earnie Shavers"}
 ];
 
 const VAR_TABLE=[
-  {name:"Jab doble",base:"1 + 1",obj:"Mentón",cuando:"Para cegar la guardia antes del 2"},
-  {name:"Jab de cuerpo",base:"1 (bajo)",obj:"Costillas",cuando:"Desgaste a media distancia"},
-  {name:"Overhand derecho",base:"2 (arco)",obj:"Mentón / sien",cuando:"Rival más bajo o agachado"},
-  {name:"Cross de contra",base:"2 (contra)",obj:"Mentón",cuando:"Al leer el jab rival"},
-  {name:"Check hook",base:"3 + pivote",obj:"Sien",cuando:"Salir de ángulo tras golpear"},
-  {name:"Gancho al hígado",base:"4 (bajo)",obj:"Hígado",cuando:"Distancia corta, guardia baja rival"},
-  {name:"Bolo punch",base:"5/6 (circular)",obj:"Mentón",cuando:"Amague, uso limitado en competencia"},
-  {name:"Uppercut en clinch",base:"5/6 (corto)",obj:"Plexo / mentón",cuando:"Cuerpo a cuerpo sin distancia"}
+  {name:"Jab doble",base:"1 + 1",obj:"Mentón",cuando:"Para cegar la guardia antes del 2",riesgo:"Bajo"},
+  {name:"Jab de cuerpo",base:"1 (bajo)",obj:"Costillas",cuando:"Desgaste a media distancia",riesgo:"Bajo"},
+  {name:"Jab de salida",base:"1 (empuje)",obj:"Mentón / pecho",cuando:"Crear distancia de emergencia",riesgo:"Muy bajo"},
+  {name:"Overhand derecho",base:"2 (arco)",obj:"Mentón / sien",cuando:"Rival más bajo o agachado",riesgo:"Medio"},
+  {name:"Cross de contra",base:"2 (contra)",obj:"Mentón",cuando:"Al leer el jab rival",riesgo:"Medio"},
+  {name:"Check hook",base:"3 + pivote",obj:"Sien",cuando:"Salir de ángulo tras golpear",riesgo:"Medio"},
+  {name:"Gancho al hígado",base:"4 (bajo)",obj:"Hígado",cuando:"Distancia corta, guardia baja rival",riesgo:"Alto"},
+  {name:"Shovel hook",base:"3/4 (45°)",obj:"Costillas / mentón",cuando:"Clinch o distancia muy corta",riesgo:"Alto"},
+  {name:"Bolo punch",base:"5/6 (circular)",obj:"Mentón",cuando:"Amague, uso limitado en competencia",riesgo:"Muy alto"},
+  {name:"Uppercut en clinch",base:"5/6 (corto)",obj:"Plexo / mentón",cuando:"Cuerpo a cuerpo sin distancia",riesgo:"Alto"}
 ];
 
 const PRESETS=[
@@ -651,6 +1134,14 @@ function diagramSVG(idPrefix){
 
 document.getElementById('diagramMount').innerHTML = diagramSVG('main');
 document.getElementById('quizDiagramMount').innerHTML = diagramSVG('quiz');
+
+const gc=document.getElementById('guardChecklist');
+GUARD_CHECK.forEach(g=>{
+  const c=document.createElement('div');
+  c.className='rule-card';
+  c.innerHTML=`<b>${g.v}</b><span class="rule-label">${g.label}</span><p>${g.d}</p>`;
+  gc.appendChild(c);
+});
 
 let southpaw=false;
 function setStance(s){
@@ -774,6 +1265,7 @@ function onBadgeClick(num, el){
 function showDetail(num){
   const p=PUNCHES[num];
   const panel=document.getElementById('detailPanel');
+  const coachHtml = p.coach ? `<div class="coach-box"><h4>Lo que dicen los entrenadores</h4><ul>${p.coach.map(c=>`<li>${c}</li>`).join('')}</ul></div>` : '';
   panel.innerHTML = `
     <span class="hand-tag">${p.hand==='lead'?'Mano adelantada':'Mano trasera'}</span>
     <span class="zone-pill">Impacta en: ${p.zone}</span>
@@ -783,9 +1275,12 @@ function showDetail(num){
     <div class="detail-grid">
       <div class="detail-block"><h4>Biomecánica</h4><ul>${p.bio.map(x=>`<li>${x}</li>`).join('')}</ul></div>
       <div class="detail-block"><h4>Uso táctico</h4><p>${p.uso}</p></div>
-      <div class="detail-block"><h4>Error común</h4><p>${p.error}</p></div>
+      <div class="detail-block"><h4>Cómo combina</h4><p>${p.combina}</p></div>
+      <div class="detail-block"><h4>Cómo contrarrestarlo</h4><p>${p.contra}</p></div>
+      <div class="detail-block"><h4>Error común (cómo se ve)</h4><p>${p.error}</p></div>
       <div class="detail-block"><h4>Defensa habitual</h4><p>${p.defensa}</p></div>
     </div>
+    ${coachHtml}
   `;
 }
 
@@ -854,7 +1349,225 @@ PRESETS.forEach(p=>{
 
 setMode('single');
 
+/* ============ TACTICS ============ */
+
+const TACTICS = [
+  {n:"01", h:"Control de distancia", d:"Decidir con el pie, no con el brazo, si se está dentro o fuera del alcance rival. Quien maneja la distancia decide cuándo hay pelea y cuándo no. Es la habilidad más subestimada del deporte."},
+  {n:"02", h:"Feints (amagues)", d:"Un gesto falso de golpe, guardia o paso que obliga al rival a reaccionar y abre el hueco real. Un boxeador que nunca amaga es totalmente predecible. Los maestros (Mayweather, Lomachenko) amagan tanto como golpean."},
+  {n:"03", h:"Ring generalship", d:"Administrar el espacio del cuadrilátero: cortar el ring al rival que retrocede, o usar sus diagonales para no quedar nunca contra las cuerdas. El ring es un tablero; el footwork es el movimiento de piezas."},
+  {n:"04", h:"Timing sobre velocidad", d:"Golpear en el instante exacto en que el rival inicia su propio golpe o cambia de peso pesa más que la velocidad pura del puño. Juan Manuel Márquez y los grandes counter-punchers viven de esto."},
+  {n:"05", h:"Contraataque", d:"Convertir la defensa en ofensiva: esquivar o bloquear y devolver en el mismo instante en que el rival está comprometido con su golpe. Defensa y ofensiva simultáneas, como enseñaba Cus D'Amato."},
+  {n:"06", h:"Trabajo de cuerpo", d:"Golpear el torso baja los brazos y el ritmo respiratorio del rival con el paso de los rounds, abriendo la cabeza para más adelante. Chávez y Golovkin construyeron campeonatos sobre el hígado."},
+  {n:"07", h:"Cambios de ritmo", d:"Alternar tramos lentos y explosiones cortas rompe la lectura del rival, que se acostumbra a un tempo y queda descolocado ante el cambio. Pacquiao y los swarmers técnicos lo usan para desgastar la atención."},
+  {n:"08", h:"Lectura de guardia", d:"Detectar si el rival baja la mano trasera, adelanta el mentón o carga el peso en un pie: ahí vive el golpe que va a funcionar. El ojo del entrenador se entrena mirando sparring y peleas, no solo tirando guantes."}
+];
+
+const RANGES = [
+  {label:"Rango 0", h:"Distancia larga", d:"Fuera del alcance de ambos. Se usa para observar, cortar el ring y decidir cuándo entrar; casi no hay golpes posibles desde acá."},
+  {label:"Rango 1", h:"Distancia de jab", d:"Alcance del brazo extendido. Es la zona del jab, del feint y de las entradas y salidas rápidas sin comprometerse."},
+  {label:"Rango 2", h:"Distancia media", d:"Ambos boxeadores pueden conectar combinaciones completas: jab, cross y ganchos. Es donde se libran la mayoría de los intercambios."},
+  {label:"Rango 3", h:"Distancia corta / clinch", d:"Cuerpo a cuerpo. Zona de ganchos cortos y uppercuts; también donde el árbitro suele intervenir para separar el clinch."}
+];
+
+const STYLES = [
+  {h:"Boxer-puncher", alias:"El más completo", d:"Combina buena técnica de boxeo puro con poder real de nocaut. Sabe mantener distancia y también forzar el intercambio cuando conviene, adaptando su plan según el rival. Es el perfil más versátil: puede boxear o pelear según el momento.", ref:"Canelo Álvarez · Sugar Ray Leonard · Thomas Hearns en su mejor versión."},
+  {h:"Swarmer / in-fighter", alias:"Presión constante", d:"Acorta distancia todo el tiempo, trabaja en rango corto con combinaciones cortas y volumen alto de golpes, buscando desgastar antes que sorprender. Exige gran capacidad aeróbica y tolerancia al castigo.", ref:"Joe Frazier · Mike Tyson (etapa temprana) · Julio César Chávez."},
+  {h:"Out-fighter / boxer", alias:"Distancia y puntos", d:"Prioriza el jab, el movimiento de piernas y la distancia larga. Evita el intercambio parejo y construye la pelea a base de puntos, no de nocaut. El arte de «golpear y no ser golpeado».", ref:"Muhammad Ali · Willie Pep · Pernell Whitaker."},
+  {h:"Counter-puncher", alias:"Paciencia y timing", d:"Espera el error o el golpe del rival para responder en el instante exacto. Depende de reflejos, lectura y una defensa sólida más que de la iniciativa. «Timing sobre velocidad» es su lema.", ref:"Floyd Mayweather Jr. · Juan Manuel Márquez · Bernard Hopkins."},
+  {h:"Slugger / banger", alias:"Poder por sobre todo", d:"Menos técnica y más peligro real en cada mano. Busca el nocaut desde el primer round, arriesgando recibir a cambio de definir la pelea en un instante. Cuando conecta, cambia el combate de un solo golpe.", ref:"George Foreman · Deontay Wilder · Earnie Shavers."},
+  {h:"Body snatcher", alias:"El especialista de cuerpo", d:"Construye toda su estrategia atacando el torso: hígado y plexo solar. Sabe que un cuerpo castigado baja los brazos solo, sin necesitar golpear jamás la cabeza. Desgaste acumulado como arma principal.", ref:"Julio César Chávez · Roberto Durán · Gennady Golovkin."},
+  {h:"Volumen / presión técnica", alias:"Cantidad con orden", d:"Combina la presión del swarmer con una base técnica más ordenada: tira muchísimos golpes por asalto, pero sin perder guardia ni estructura. Alto output sin caos.", ref:"Naoya Inoue · Vasyl Lomachenko · Terence Crawford."},
+  {h:"Spoiler / estilo incómodo", alias:"El que rompe el ritmo", d:"Prioriza no dejar pelear al rival: ángulos raros, clinch, cambios de altura y un ritmo irregular que hace que nada fluya como el oponente esperaba. Difícil de puntuar y de disfrutar… para el rival.", ref:"Emanuel Augustus · Guillermo Rigondeaux · Andre Ward."}
+];
+
+const DEFENSE = [
+  {n:"01", h:"Guardia alta (block)", d:"Los antebrazos y guantes cubren mentón y sienes. Absorbe el golpe en vez de evitarlo; es el último recurso, no el primero. En peek-a-boo (Cus D'Amato) la guardia alta se combina con movimiento constante de cabeza para no quedarse estático."},
+  {n:"02", h:"Slip (esquiva lateral)", d:"Un giro corto de cintura y cabeza que deja el golpe recto pasando a centímetros de la cara, sin perder posición para contragolpear. Floyd Mayweather y los maestros del Philly shoulder roll lo convirtieron en arte: el slip habilita el cross o el gancho de contra en el mismo instante."},
+  {n:"03", h:"Roll / bob and weave", d:"Flexión de piernas y movimiento de cabeza en «U» por debajo de un gancho o cross, reapareciendo del otro lado listo para responder. Base del in-fighting de Joe Frazier y de la escuela peek-a-boo de Tyson: cada roll prepara el uppercut o el gancho de salida."},
+  {n:"04", h:"Parry / desvío", d:"Un toque corto con la palma o el antebrazo que redirige el golpe rival apenas unos centímetros, lo suficiente para que falle su objetivo. Más eficiente energéticamente que el bloqueo puro; deja la mano libre para el contraataque inmediato."},
+  {n:"05", h:"Footwork defensivo", d:"Pasos cortos hacia atrás o pivotes laterales que sacan el cuerpo entero fuera del rango de ataque sin necesidad de bloquear nada. «Ring generalship» empieza aquí: quien controla el espacio decide cuándo hay pelea."},
+  {n:"06", h:"Clinch (traba)", d:"Sujetar los brazos del rival en distancia corta para cortar una combinación o ganar segundos de recuperación; el árbitro suele separar rápido. Usado tácticamente por Mayweather y muchos out-fighters para romper el ritmo del agresor."}
+];
+
+const DEF_TABLE = [
+  {golpe:"Jab (1)", resp:"Parry o desvío con el guante trasero", contra:"Cross de contra por encima del brazo que quedó bajo"},
+  {golpe:"Cross (2)", resp:"Slip lateral hacia el lado del jab", contra:"Gancho adelantado apenas termina el giro rival"},
+  {golpe:"Gancho adelantado (3)", resp:"Bloqueo con antebrazo trasero pegado a la cabeza", contra:"Cross directo mientras el rival vuelve a su guardia"},
+  {golpe:"Gancho trasero (4)", resp:"Roll (bob and weave) por debajo del arco", contra:"Uppercut adelantado al reaparecer del otro lado"},
+  {golpe:"Uppercut adelantado (5)", resp:"Retroceder o bloqueo bajo con el codo", contra:"Jab inmediato apenas se recupera la distancia"},
+  {golpe:"Uppercut trasero (6)", resp:"Clinch o control de distancia con footwork", contra:"Gancho corto al perder el rival el equilibrio"}
+];
+
+const PHASES = [
+  {h:"Rounds tempranos", alias:"Explorar sin exponerse", d:"Se usa el jab para medir distancia y leer reflejos, reacciones y postura del rival. El objetivo no es lastimar todavía, sino recolectar información para el plan.", ref:"Errores acá se pagan caro: es fácil sobreestimar a un rival por un buen arranque."},
+  {h:"Rounds medios", alias:"Ejecutar el plan", d:"Con la información recolectada, se aplican los ajustes: cambiar de distancia, atacar el cuerpo, cerrar ángulos. Es donde suele decidirse el rumbo real de la pelea.", ref:"El desgaste físico empieza a notarse y a condicionar las decisiones tácticas."},
+  {h:"Rounds finales", alias:"Administrar o arriesgar", d:"Según el marcador percibido, el boxeador elige entre cuidar la ventaja con distancia y clinch, o arriesgar todo buscando el nocaut si va abajo en las tarjetas.", ref:"La condición física acumulada de todo el campamento se nota más que nunca acá."}
+];
+
+const US_SCHOOLS = [
+  {h:"Philly shoulder roll", alias:"El hombro como escudo", d:"El hombro adelantado tapa el mentón mientras la mano trasera queda libre para parar o contragolpear; el torso rueda para hacer fallar el golpe recto en vez de moverse con los pies. Es una defensa exigente: requiere timing y distancia muy afinados para no convertirse en un blanco fácil. Cuando se ejecuta bien, el rival «golpea aire» y queda expuesto al contra.", ref:"Origen en los gimnasios de Filadelfia. George Benton como pionero; herederos: Bernard Hopkins, James Toney, Floyd Mayweather Jr."},
+  {h:"Estilo Kronk (Detroit)", alias:"El jab como arma de poder", d:"Boxeadores altos y con alcance, formados para sostener un jab constante y agresivo —no solo de medición— antes de soltar la mano de poder. Prioriza la ofensiva estructurada sobre la prudencia defensiva extrema. Steward insistía en que el sparring de calidad forja campeones.", ref:"Gimnasio Kronk, Emanuel Steward. Campeones: Thomas Hearns, Lennox Lewis, Wladimir Klitschko, Hilmer Kenty."},
+  {h:"Peek-a-boo", alias:"Una escuela más, no «la» americana", d:"Guardia alta y cerrada pegada a la cara, movimiento de cabeza constante y explosiones cortas en distancia corta-media, saliendo en ángulo tras cada intercambio. Defensa y ofensiva simultáneas: cada esquiva prepara el golpe. Exigente físicamente y mentalmente.", ref:"Sistema de Cus D'Amato. Exponentes: Floyd Patterson, José Torres, Mike Tyson. «El movimiento de cabeza debe anticipar siempre al golpe.»"}
+];
+
+const SCHOOLS = [
+  {h:"Escuela cubana", alias:"Precisión antes que volumen", d:"Sistema estatal y unificado desde el amateurismo: footwork constante, guardia relajada, cambios de ritmo y un golpe limpio que basta para sumar puntos, priorizando no ser tocado por sobre arriesgar intercambios. La ciencia del movimiento al servicio de la eficiencia.", ref:"Teófilo Stevenson · Félix Savón · Guillermo Rigondeaux · Luis Ortiz · Kid Chocolate."},
+  {h:"Estilo mexicano", alias:"Una etiqueta más discutida de lo que parece", d:"Asociado casi siempre a presión hacia adelante, castigo constante al cuerpo y disposición a intercambiar golpes sin resignar ofensiva por cautela. Canelo Álvarez llegó a declarar que «el estilo mexicano no existe» como método unificado; Abel Sánchez lo reivindicó incluso para Golovkin. Describe más una actitud compartida que una escuela técnica cerrada.", ref:"Julio César Chávez · Salvador Sánchez · Juan Manuel Márquez · Rubén «El Púas» Olivares."},
+  {h:"Estilo puertorriqueño", alias:"Velocidad de manos con filo mexicano", d:"Primo cercano del estilo mexicano: comparte el gusto por el intercambio, pero con más velocidad de manos, variedad de ángulos y un toque de elegancia técnica en el ataque.", ref:"Wilfred Benítez · Félix «Tito» Trinidad · Miguel Cotto · Héctor «Macho» Camacho."},
+  {h:"Estilo británico / europeo", alias:"Ortodoxia de manual", d:"Base amateur muy apegada al libro clásico: postura erguida, jab largo, distancia controlada y un boxeo que privilegia sumar puntos limpios por sobre la improvisación o el intercambio parejo. El «textbook boxing» de los clubes británicos.", ref:"Tradición de clubes del Reino Unido; exponentes modernos: Anthony Joshua (base), Tyson Fury (con variaciones), Joe Calzaghe."},
+  {h:"Escuela soviética / del Este", alias:"El boxeo como ciencia del movimiento", d:"Herencia del sistema deportivo estatal soviético: ángulos calculados, eficiencia biomecánica y preparación física sistematizada. Hoy visible en kazajos y europeos del Este. Las etiquetas nacionales rara vez son puras: Golovkin también absorbió el «estilo mexicano».", ref:"Gennady Golovkin · Vasyl Lomachenko · Oleksandr Usyk · Wladimir Klitschko."},
+  {h:"Estilo filipino", alias:"Ángulos y volumen antes que poder puro", d:"Combinaciones veloces desde ángulos poco convencionales, apoyadas en reflejos y cadencia; suele alternar guardia ortodoxa y zurda con fluidez dentro de la misma pelea. Ritmo irregular que descoloca.", ref:"Manny Pacquiao (figura central a nivel mundial) · Nonito Donaire · Flash Elorde."},
+  {h:"Escuela japonesa", alias:"Fundamentos depurados, volumen implacable", d:"Sistema de gimnasios con progresión muy estructurada desde jóvenes, base ortodoxa muy trabajada y enorme volumen de golpes limpios, con ataque constante al cuerpo. Disciplina y repetición como religión.", ref:"Naoya Inoue · Jiro Watanabe · Masahiko «Fighting» Harada · Kosei Tanaka."}
+];
+
+const RULES = [
+  {v:"3 min", label:"Duración del round", d:"Estándar en profesionales (2 min en amateur/olímpico)."},
+  {v:"10–12", label:"Rounds (título mundial)", d:"Las peleas no titulares suelen ser de 4 a 10 rounds."},
+  {v:"1 min", label:"Descanso entre rounds", d:"Tiempo para el trabajo del rincón y la esquina."},
+  {v:"10", label:"Sistema de puntuación", d:"'10-point must': el ganador del round suma 10, el perdedor 9 o menos."},
+  {v:"8", label:"Conteo de protección", d:"Cuenta obligatoria del árbitro tras una caída, antes de reanudar."},
+  {v:"KO / TKO", label:"Formas de victoria", d:"Nocaut, nocaut técnico, decisión de jueces o abandono en el rincón."}
+];
+
+const WEIGHTS = [
+  {n:"1", name:"Peso mosca", traj:"Hasta 50,8 kg / 112 lbs", alcance:35, vel:95, pot:20, riesgo:15, gasto:40, dist:"Corta-media", exp:"Roman «Chocolatito» González, Jimmy Wilde, Pongsaklek Wonjongkam"},
+  {n:"2", name:"Peso gallo", traj:"Hasta 53,5 kg / 118 lbs", alcance:40, vel:92, pot:28, riesgo:18, gasto:42, dist:"Corta-media", exp:"Naoya Inoue, Eder Jofre, Carlos Zárate"},
+  {n:"3", name:"Peso pluma", traj:"Hasta 57,2 kg / 126 lbs", alcance:45, vel:88, pot:35, riesgo:22, gasto:45, dist:"Media", exp:"Salvador Sánchez, Willie Pep, Naseem Hamed"},
+  {n:"4", name:"Peso ligero", traj:"Hasta 61,2 kg / 135 lbs", alcance:55, vel:82, pot:45, riesgo:28, gasto:50, dist:"Media", exp:"Roberto Durán, Pernell Whitaker, Benny Leonard"},
+  {n:"5", name:"Peso wélter", traj:"Hasta 66,7 kg / 147 lbs", alcance:62, vel:76, pot:55, riesgo:34, gasto:54, dist:"Media-larga", exp:"Sugar Ray Robinson, Sugar Ray Leonard, Floyd Mayweather Jr."},
+  {n:"6", name:"Peso mediano", traj:"Hasta 72,6 kg / 160 lbs", alcance:70, vel:68, pot:68, riesgo:42, gasto:58, dist:"Media-larga", exp:"Marvin Hagler, Carlos Monzón, Bernard Hopkins"},
+  {n:"7", name:"Semipesado", traj:"Hasta 79,4 kg / 175 lbs", alcance:78, vel:60, pot:78, riesgo:50, gasto:62, dist:"Larga", exp:"Roy Jones Jr., Archie Moore, Dmitry Bivol"},
+  {n:"8", name:"Peso pesado", traj:"Sin límite (+90,7 kg / +200 lbs)", alcance:90, vel:50, pot:95, riesgo:65, gasto:68, dist:"Larga", exp:"Muhammad Ali, Joe Louis, Lennox Lewis, Mike Tyson"}
+];
+
+const GLOSSARY = [
+  {t:"Southpaw", d:"Guardia zurda: pie y mano derecha adelante, izquierda atrás. Lo inverso del ortodoxo. Obliga al ortodoxo a reajustar ángulos y footwork."},
+  {t:"Clinch", d:"Cuerpo a cuerpo donde ambos boxeadores traban los brazos; el árbitro suele separar rápido. Herramienta táctica para cortar combinaciones o recuperar aliento."},
+  {t:"Break", d:"Orden del árbitro para separarse tras un clinch antes de reanudar la acción."},
+  {t:"TKO / RSC", d:"Nocaut técnico: el árbitro o el rincón detiene la pelea sin conteo final de diez. Protege al boxeador que ya no se defiende de forma efectiva."},
+  {t:"Standing eight count", d:"Conteo de protección que puede darse sin necesidad de una caída al piso (más habitual en amateur)."},
+  {t:"Cutman", d:"Especialista del rincón que trata cortes e hinchazón entre round y round. Puede decidir si un boxeador sigue o no."},
+  {t:"Rincón / esquina", d:"El equipo y el espacio físico donde el boxeador descansa entre rounds. El entrenador principal, el cutman y el second forman el «corner»."},
+  {t:"Guardia", d:"Posición base de manos, pies y torso desde la que se ataca y se defiende. Ortodoxa o southpaw; alta, media o peek-a-boo según la escuela."},
+  {t:"Sparring", d:"Combate de entrenamiento, con reglas más suaves, para practicar en condiciones reales. Steward: un boxeador es tan bueno como con quien entrena."},
+  {t:"Roadwork", d:"Trabajo aeróbico de base —trote, carrera— característico de la preparación física boxística. Base de la resistencia de 12 rounds."},
+  {t:"Telegrafiar", d:"Anticipar un golpe con un gesto previo (bajar hombro, cargar el puño) que le avisa al rival. El error más castigado en el alto nivel."},
+  {t:"Ring rust", d:"Pérdida de reflejos y ritmo de combate tras un período largo sin pelear. Se nota en timing y en la «lectura» del rival."},
+  {t:"Southpaw switch", d:"Cambio de guardia de ortodoxo a zurdo (o viceversa) en medio de una pelea para confundir al rival. Pacquiao y Lomachenko lo usaron con maestría."},
+  {t:"Puntos (decisión)", d:"Resultado que define un juez, sumando el sistema 10-point must de cada round, cuando no hubo nocaut. UD (unánime), SD (dividida) o MD (mayoritaria)."},
+  {t:"Rabbit punch", d:"Golpe ilegal a la nuca; penado con amonestación o descalificación según su gravedad."},
+  {t:"Infighting", d:"Boxeo desarrollado en distancia muy corta, cuerpo a cuerpo, con ganchos y uppercuts cortos. Zona de los swarmers y body snatchers."},
+  {t:"Pesaje (weigh-in)", d:"Control oficial de peso, el día previo a la pelea, para confirmar que ambos entran en su categoría. Fallar el peso puede costar el título o la bolsa."},
+  {t:"Mano de poder", d:"La mano trasera en la mayoría de los boxeadores: la que genera más potencia por su recorrido y rotación. En southpaw, la izquierda."},
+  {t:"Feint (amague)", d:"Gesto falso de golpe, paso o guardia que obliga al rival a reaccionar y abre el hueco real. Sin amagues, el boxeador es predecible."},
+  {t:"Ring generalship", d:"Administración del espacio del cuadrilátero: cortar el ring al que retrocede o usar diagonales para no quedar contra las cuerdas."}
+];
+
+const tg=document.getElementById('tacticsGrid');
+TACTICS.forEach(t=>{
+  const c=document.createElement('div');
+  c.className='tac-card';
+  c.innerHTML=`<div class="tac-num">${t.n}</div><h4>${t.h}</h4><p>${t.d}</p>`;
+  tg.appendChild(c);
+});
+
+const dg=document.getElementById('defenseGrid');
+DEFENSE.forEach(t=>{
+  const c=document.createElement('div');
+  c.className='tac-card';
+  c.innerHTML=`<div class="tac-num">${t.n}</div><h4>${t.h}</h4><p>${t.d}</p>`;
+  dg.appendChild(c);
+});
+
+const rt=document.getElementById('rangeTrack');
+RANGES.forEach(r=>{
+  const c=document.createElement('div');
+  c.className='range-step';
+  c.innerHTML=`<div class="rs-bar"></div><div class="rs-label">${r.label}</div><h4>${r.h}</h4><p>${r.d}</p>`;
+  rt.appendChild(c);
+});
+
+const sg=document.getElementById('styleGrid');
+STYLES.forEach(s=>{
+  const c=document.createElement('div');
+  c.className='style-card';
+  c.innerHTML=`<h4>${s.h}</h4><div class="style-alias">${s.alias}</div><p>${s.d}</p><div class="style-ref">${s.ref}</div>`;
+  sg.appendChild(c);
+});
+
+document.getElementById('defenseTable').innerHTML = `
+  <thead><tr><th>Golpe rival</th><th>Respuesta defensiva</th><th>Contragolpe habilitado</th></tr></thead>
+  <tbody>
+    ${DEF_TABLE.map(d=>`<tr>
+      <td class="name">${d.golpe}</td>
+      <td>${d.resp}</td>
+      <td>${d.contra}</td>
+    </tr>`).join('')}
+  </tbody>
+`;
+
+const pg=document.getElementById('phaseGrid');
+PHASES.forEach(s=>{
+  const c=document.createElement('div');
+  c.className='style-card';
+  c.innerHTML=`<h4>${s.h}</h4><div class="style-alias">${s.alias}</div><p>${s.d}</p><div class="style-ref">${s.ref}</div>`;
+  pg.appendChild(c);
+});
+
+const usg=document.getElementById('usSchoolGrid');
+US_SCHOOLS.forEach(s=>{
+  const c=document.createElement('div');
+  c.className='style-card';
+  c.innerHTML=`<h4>${s.h}</h4><div class="style-alias">${s.alias}</div><p>${s.d}</p><div class="style-ref">${s.ref}</div>`;
+  usg.appendChild(c);
+});
+
+const scg=document.getElementById('schoolGrid');
+SCHOOLS.forEach(s=>{
+  const c=document.createElement('div');
+  c.className='style-card';
+  c.innerHTML=`<h4>${s.h}</h4><div class="style-alias">${s.alias}</div><p>${s.d}</p><div class="style-ref">${s.ref}</div>`;
+  scg.appendChild(c);
+});
+
+const rg=document.getElementById('rulesGrid');
+RULES.forEach(r=>{
+  const c=document.createElement('div');
+  c.className='rule-card';
+  c.innerHTML=`<b>${r.v}</b><span class="rule-label">${r.label}</span><p>${r.d}</p>`;
+  rg.appendChild(c);
+});
+
+document.getElementById('weightTable').innerHTML = `
+  <thead><tr>
+    <th>#</th><th>Categoría</th><th>Límite (kg / lbs)</th><th>Alcance típico</th><th>Velocidad típica</th><th>Potencia típica</th><th>Riesgo al fallar</th><th>Gasto energético</th><th>Distancia habitual</th><th>Exponentes históricos</th>
+  </tr></thead>
+  <tbody>
+    ${WEIGHTS.map(r=>`<tr>
+      <td class="name">${r.n}</td>
+      <td class="name">${r.name}</td>
+      <td>${r.traj}</td>
+      <td>${bar(r.alcance)}</td>
+      <td>${bar(r.vel)}</td>
+      <td>${bar(r.pot)}</td>
+      <td>${bar(r.riesgo,'risk')}</td>
+      <td>${bar(r.gasto,'risk')}</td>
+      <td>${r.dist}</td>
+      <td class="exp">${r.exp}</td>
+    </tr>`).join('')}
+  </tbody>
+`;
+
+const gg=document.getElementById('glossaryGrid');
+GLOSSARY.forEach(g=>{
+  const el=document.createElement('div');
+  el.className='gloss-item';
+  el.innerHTML=`<dt>${g.t}</dt><dd>${g.d}</dd>`;
+  gg.appendChild(el);
+});
+
 /* ============ VARIANTS ============ */
+
 
 const vg=document.getElementById('variantGrid');
 VARIANTS.forEach(v=>{
@@ -870,7 +1583,7 @@ function bar(val,cls){return `<div class="meter ${cls||''}"><span style="width:$
 
 document.getElementById('refTable').innerHTML = `
   <thead><tr>
-    <th>#</th><th>Golpe</th><th>Trayectoria</th><th>Alcance</th><th>Velocidad</th><th>Potencia</th><th>Riesgo al fallar</th><th>Gasto energético</th><th>Distancia ideal</th><th>Exponente histórico</th>
+    <th>#</th><th>Golpe</th><th>Trayectoria</th><th>Alcance</th><th>Velocidad</th><th>Potencia</th><th>Riesgo al fallar</th><th>Gasto energético</th><th>Distancia ideal</th><th>Exponentes históricos</th>
   </tr></thead>
   <tbody>
     ${REF.map(r=>`<tr>
@@ -889,13 +1602,14 @@ document.getElementById('refTable').innerHTML = `
 `;
 
 document.getElementById('variantTable').innerHTML = `
-  <thead><tr><th>Variante</th><th>Golpe base</th><th>Objetivo</th><th>Cuándo usarla</th></tr></thead>
+  <thead><tr><th>Variante</th><th>Golpe base</th><th>Objetivo</th><th>Cuándo usarla</th><th>Riesgo al fallar</th></tr></thead>
   <tbody>
     ${VAR_TABLE.map(v=>`<tr>
       <td class="name">${v.name}</td>
       <td>${v.base}</td>
       <td>${v.obj}</td>
       <td>${v.cuando}</td>
+      <td>${v.riesgo}</td>
     </tr>`).join('')}
   </tbody>
 `;
@@ -957,6 +1671,194 @@ function answerQuiz(num, btn){
 }
 
 nextQuizRound();
+
+/* ============ SCENARIOS ============ */
+const SCENARIOS = [
+  {
+    h:"El rival tira jab y se queda",
+    setup:"Estás en distancia de jab. El oponente lanza un jab flojo y no recupera la mano a tiempo: el mentón queda un instante a la vista detrás del brazo extendido.",
+    opts:[
+      {t:"Esperar y seguir midiendo con jab", good:false, fb:"Seguro, pero desperdiciás la ventana. El error del rival dura menos de un segundo."},
+      {t:"Cross de contra por encima del brazo que quedó largo", good:true, fb:"Lectura clásica de gimnasio: el jab mal recuperado habilita el 2. Timing > fuerza."},
+      {t:"Gancho adelantado amplio desde lejos", good:false, fb:"Desde distancia de jab el gancho no llega bien y te expone al contra del rival."}
+    ]
+  },
+  {
+    h:"Estás contra las cuerdas en el 10",
+    setup:"Vas abajo en las tarjetas. El rival te presiona contra las cuerdas con volumen. Tenés fuerza en las piernas pero poco espacio para el jab largo.",
+    opts:[
+      {t:"Clinch para frenar el ritmo y ganar segundos", good:true, fb:"Correcto como primer recurso: cortás la combinación, obligás al árbitro a separar y recuperás un respiro. Después hay que salir de la esquina."},
+      {t:"Intercambiar de poder sin mover los pies", good:false, fb:"Alto riesgo: contra las cuerdas el rival tiene ángulo y vos no tenés escape. Podés conectar, pero también recibir el que cierra la pelea."},
+      {t:"Bajar la guardia para invitarlo a tirar y contragolpear", good:false, fb:"Amague peligroso cuando ya estás comprometido de espacio. Mejor recuperar pie y lateral antes de buscar el contra."}
+    ]
+  },
+  {
+    h:"El rival baja la guardia tras un golpe al cuerpo",
+    setup:"Conectaste un gancho al hígado. El oponente se pliega un segundo, los codos bajan y el mentón queda más alto de lo normal.",
+    opts:[
+      {t:"Otro gancho al mismo costado de inmediato", good:false, fb:"Puede funcionar, pero la ventana más clara suele estar arriba: la cabeza quedó desprotegida."},
+      {t:"Uppercut o cross corto al mentón mientras baja la mirada", good:true, fb:"Cadena clásica cuerpo-cabeza. El dolor al hígado baja los brazos; el golpe de arriba cierra."},
+      {t:"Retroceder para resetear la distancia", good:false, fb:"Perdés la ventaja que acabás de crear. Si estás en rango, hay que capitalizar antes de que recupere la guardia."}
+    ]
+  },
+  {
+    h:"Southpaw vs ortodoxo: pies alineados",
+    setup:"Cruz de guardias. Los pies delanteros están casi en la misma línea. El rival intenta entrar con jab.",
+    opts:[
+      {t:"Ceder el pie delantero y boxear desde adentro de su línea", good:false, fb:"Quedás en el ángulo malo: su mano trasera apunta más fácil a tu mentón."},
+      {t:"Ganar el pie delantero por fuera y atacar con el cross/recto", good:true, fb:"Quien controla el pie adelantado por fuera gana el ángulo. El recto de la mano trasera viaja más limpio."},
+      {t:"Ignorar los pies y buscar solo el intercambio de manos", good:false, fb:"En el cruce de guardias los pies deciden casi tanto como los puños. Sin posición, el intercambio favorece al mejor ubicado."}
+    ]
+  }
+];
+
+const sm=document.getElementById('scenarioMount');
+if(sm){
+  SCENARIOS.forEach((s,si)=>{
+    const card=document.createElement('div');
+    card.className='scenario-card';
+    const optsHtml=s.opts.map((o,oi)=>'<button type="button" class="scenario-opt" data-s="'+si+'" data-o="'+oi+'">'+o.t+'</button>').join('');
+    card.innerHTML='<h4>'+s.h+'</h4><p class="scenario-setup">'+s.setup+'</p><div class="scenario-opts">'+optsHtml+'</div><div class="scenario-fb" id="sfb'+si+'"></div>';
+    sm.appendChild(card);
+  });
+  sm.addEventListener('click',e=>{
+    const btn=e.target.closest('.scenario-opt');
+    if(!btn||btn.disabled) return;
+    const si=+btn.dataset.s, oi=+btn.dataset.o;
+    const s=SCENARIOS[si], o=s.opts[oi];
+    const card=btn.closest('.scenario-card');
+    card.querySelectorAll('.scenario-opt').forEach((b,i)=>{
+      b.disabled=true;
+      if(s.opts[i].good) b.classList.add('chosen-good');
+      else if(i===oi) b.classList.add('chosen-bad');
+    });
+    const fb=document.getElementById('sfb'+si);
+    fb.textContent=o.fb;
+    fb.classList.add('show');
+  });
+}
+
+/* ============ ZONES + BIO ============ */
+const ZONES_SCI = [
+  {name:"Mentón / mandíbula", title:"El apalancamiento del nocaut", d:"Un impacto limpio en la punta de la mandíbula transmite rotación a la cabeza. El cerebro, flotando en líquido cefalorraquídeo, no gira al mismo ritmo: se produce cizallamiento de tejidos y, en casos suficientes, pérdida de conciencia.", sci:"La mandíbula actúa como palanca sobre la base del cráneo. Por eso un gancho o un cross bien colocado «apaga la luz» sin necesidad de ser el golpe más fuerte del combate."},
+  {name:"Sien", title:"Hueso fino, riesgo alto", d:"La región temporal tiene hueso relativamente delgado y está cerca de estructuras vasculares y del lóbulo temporal. Un gancho limpio ahí puede aturdir o, en el peor caso, lesionar de gravedad.", sci:"No es la zona más buscada en el entrenamiento cotidiano por el riesgo; sí aparece en ganchos cortos cuando la guardia deja el costado de la cabeza abierto."},
+  {name:"Plexo solar", title:"El diafragma se bloquea", d:"Un uppercut o un recto al hueco bajo el esternón comprime el plexo solar y puede provocar un espasmo del diafragma. El boxeador «se queda sin aire» aunque los pulmones estén llenos: no puede inspirar un momento.", sci:"No es falta de oxígeno en sangre inmediata; es una interrupción refleja de la mecánica respiratoria. Pasa en segundos, pero en el ring esos segundos alcanzan para recibir más."},
+  {name:"Hígado", title:"El corte de corriente autonómico", d:"El lóbulo derecho del hígado, bajo la caja torácica, está densamente inervado. Un gancho limpio ahí puede disparar una respuesta vagal: náuseas, debilidad en las piernas y, a veces, la imposibilidad de seguir de pie.", sci:"Por eso el «liver shot» no siempre se ve espectacular en cámara lenta y sin embargo dobla a boxeadores que aguantaron golpes de cabeza mucho más duros. El cuerpo corta antes de que la voluntad diga lo contrario."}
+];
+
+const zg=document.getElementById('zoneGrid');
+if(zg){
+  ZONES_SCI.forEach(z=>{
+    const c=document.createElement('div');
+    c.className='zone-card';
+    c.innerHTML='<div class="zone-name">'+z.name+'</div><h4>'+z.title+'</h4><p>'+z.d+'</p><div class="zone-sci">'+z.sci+'</div>';
+    zg.appendChild(c);
+  });
+}
+
+const BIO = [
+  {h:"Cadena cinética", d:"La potencia no nace en el puño: nace en el empuje contra el suelo, pasa por la rotación de cadera y torso, y recién entonces llega al hombro y al brazo. Un golpe «de brazo» gasta energía y conecta con menos masa detrás."},
+  {h:"Fatiga y precisión", d:"Con el paso de los rounds baja la velocidad de recuperación de la guardia y sube el tiempo de reacción. Por eso el trabajo de cuerpo (hígado, plexo) no solo «duele»: acumula un déficit que se paga arriba, cuando los brazos ya no suben a tiempo."},
+  {h:"Visión y fijación", d:"Mirar los ojos del rival invita al amague; mirar el pecho o los hombros da información más estable sobre el peso y el próximo golpe. El sistema visual prioriza movimiento periférico: por eso un feint bien hecho dispara una reacción antes de que el golpe real salga."},
+  {h:"Equilibrio y base", d:"Si el peso está mal repartido o el talón trasero no puede pivotar, el mismo golpe que en el saco «entra» en el ring te deja expuesto al contra. El equilibrio no es postura estática: es la capacidad de disparar fuerza y recuperar la base en el mismo ciclo."}
+];
+
+const bg=document.getElementById('bioGrid');
+if(bg){
+  BIO.forEach(b=>{
+    const c=document.createElement('div');
+    c.className='bio-card';
+    c.innerHTML='<h4>'+b.h+'</h4><p>'+b.d+'</p>';
+    bg.appendChild(c);
+  });
+}
+
+/* ============ FIGHTS TO STUDY ============ */
+const FIGHTS = [
+  {names:"Ali vs. Foreman", meta:"Kinshasa, 1974 · «Rumble in the Jungle»", why:"Rope-a-dope y control de ritmo: cómo ceder el espacio de las cuerdas sin ceder el plan. Útil junto al round de táctica y fases del combate."},
+  {names:"Frazier vs. Ali I", meta:"Nueva York, 1971 · «Fight of the Century»", why:"El gancho adelantado como arma de presión constante. Bob and weave + left hook de Frazier; estudiar el round de defensa y el arquetipo swarmer."},
+  {names:"Durán vs. Leonard I", meta:"Montreal, 1980", why:"Infighting, trabajo de cuerpo y cómo un out-fighter se ve obligado a pelear en el rango que no eligió. Cruce de arquetipos."},
+  {names:"Hearns vs. Leonard I", meta:"Las Vegas, 1981", why:"Jab de alcance Kronk vs. boxeo completo. El cross y el jab largo de Hearns; el ajuste de Leonard a mitad de pelea."},
+  {names:"Tyson vs. Spinks", meta:"Nueva Jersey, 1988", why:"Peek-a-boo en versión corta: entrada, uppercuts y el cierre en un round. Ver cadena cinética y distancia corta."},
+  {names:"Chávez vs. Taylor I", meta:"Las Vegas, 1990", why:"Presión mexicana, hígado y últimos segundos. El body work acumulado y la lectura de un round que se decide al final."},
+  {names:"Mayweather vs. Hatton", meta:"Las Vegas, 2007", why:"Shoulder roll, contragolpe y check hook. Defensa que se convierte en ofensiva en el mismo instante."},
+  {names:"Pacquiao vs. Barrera I", meta:"México, 2003", why:"Ángulos, volumen y cambio de guardia. Ritmo irregular y ataques desde líneas poco ortodoxas."},
+  {names:"Inoue vs. Donaire II", meta:"Saitama, 2018", why:"Volumen técnico a alta intensidad: jab, body, precisión bajo fuego. Estilo japonés moderno en su mejor versión."},
+  {names:"Usyk vs. Joshua II", meta:"Arabia Saudita, 2022", why:"Ring generalship, jab de control y cómo un surdo (southpaw) administra distancia ante un ortodoxo de poder."}
+];
+
+const fl=document.getElementById('fightList');
+if(fl){
+  FIGHTS.forEach(f=>{
+    const el=document.createElement('div');
+    el.className='fight-item';
+    el.innerHTML='<div><div class="fight-names">'+f.names+'</div><div class="fight-meta">'+f.meta+'</div></div><p class="fight-why">'+f.why+'</p>';
+    fl.appendChild(el);
+  });
+}
+
+/* ============ REFERENT MINI-PROFILES ============ */
+const REFERENTS = {
+  "Muhammad Ali":{tag:"Out-fighter · pesado", body:"Revolucionó el movimiento en el peso pesado: jab, footwork y un rechazo deliberado a la postura «de manual» de su época. Su legado no es solo el show: es la idea de que la distancia y el timing pueden mandar sobre el poder bruto.", fight:"Estudiar: Ali–Foreman (1974) y Ali–Frazier I (1971)."},
+  "Joe Frazier":{tag:"Swarmer · gancho adelantado", body:"Presión incesante, bob and weave y un left hook que se convirtió en firma. No buscaba el intercambio bonito: buscaba el cuerpo y la cabeza en ráfagas hasta romper el plan rival.", fight:"Estudiar: Frazier–Ali I (1971)."},
+  "Mike Tyson":{tag:"Peek-a-boo · uppercuts", body:"Bajo el sistema de Cus D'Amato: guardia alta, cabeza en movimiento constante y explosiones en distancia corta-media. En su mejor versión, defensa y ataque eran el mismo gesto.", fight:"Estudiar: Tyson–Spinks (1988) y primeros combates de título."},
+  "Floyd Mayweather Jr.":{tag:"Counter · shoulder roll", body:"Defensa de hombro, lectura de intención y economía de movimiento. Priorizó no ser golpeado y capitalizar el error ajeno. Referente moderno del Philly shoulder roll llevado al máximo nivel.", fight:"Estudiar: Mayweather–Hatton (2007)."},
+  "Julio César Chávez":{tag:"Body snatcher · presión", body:"Presión hacia adelante, castigo al hígado y una disposición a intercambiar sin regalar la ofensiva. Más actitud de campeonato que escuela cerrada, pero el cuerpo como plan de pelea quedó asociado a su nombre.", fight:"Estudiar: Chávez–Taylor I (1990)."},
+  "Sugar Ray Robinson":{tag:"Boxer-puncher · completo", body:"A menudo citado como el libra por libra más completo de la historia: jab, gancho, movimiento y poder de nocaut. El left hook a Fullmer (1957) sigue siendo material de clínica.", fight:"Estudiar: el KO a Fullmer es lectura obligada del gancho."},
+  "Thomas Hearns":{tag:"Kronk · jab y cross", body:"Alcance, jab agresivo y una derecha de campeonato. Producto del Kronk de Emanuel Steward: ofensiva estructurada desde la distancia larga.", fight:"Estudiar: Hearns–Leonard I (1981)."},
+  "Naoya Inoue":{tag:"Volumen técnico · moderno", body:"Base ortodoxa muy limpia, alto output y ataque al cuerpo sin perder estructura. Representa la escuela japonesa contemporánea al más alto nivel libra por libra.", fight:"Estudiar: Inoue–Donaire II (2018)."},
+  "Roberto Durán":{tag:"Infighting · manos de piedra", body:"Manos rápidas en distancia corta, agresividad y un gusto por pelear donde el rival no quiere. Su noche ante Leonard en Montreal es clínica de cómo arrastrar a un boxeador a tu rango.", fight:"Estudiar: Durán–Leonard I (1980)."},
+  "Cus D'Amato":{tag:"Entrenador · peek-a-boo", body:"Sistema defensivo-ofensivo simultáneo, psicología del miedo y una obsesión por el movimiento de cabeza. Formó a Patterson, Torres y Tyson. Sus cues siguen vivos en cualquier gimnasio que enseñe peek-a-boo.", fight:"Se estudia en los combates de sus discípulos."},
+  "Emanuel Steward":{tag:"Entrenador · Kronk", body:"Jab como arma, sparring de calidad y potencia como subproducto de la técnica. Kronk produjo campeones de distinto peso con una firma reconocible: alcance, recto y confianza ofensiva.", fight:"Se ve en Hearns, Lewis y el segundo aire de Wladimir Klitschko."}
+};
+
+function openRefModal(name){
+  const r=REFERENTS[name];
+  if(!r) return;
+  document.getElementById('refModalTag').textContent=r.tag;
+  document.getElementById('refModalName').textContent=name;
+  document.getElementById('refModalBody').textContent=r.body;
+  document.getElementById('refModalFight').textContent=r.fight;
+  document.getElementById('refModalBg').classList.add('open');
+}
+function closeRefModal(){ document.getElementById('refModalBg').classList.remove('open'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeRefModal(); });
+
+function linkRefs(root){
+  if(!root) return;
+  const names=Object.keys(REFERENTS).sort((a,b)=>b.length-a.length);
+  const walk=node=>{
+    if(node.nodeType===3){
+      let text=node.nodeValue;
+      for(const n of names){
+        const idx=text.indexOf(n);
+        if(idx!==-1){
+          const before=text.slice(0,idx);
+          const after=text.slice(idx+n.length);
+          const frag=document.createDocumentFragment();
+          if(before) frag.appendChild(document.createTextNode(before));
+          const a=document.createElement('span');
+          a.className='ref-link';
+          a.textContent=n;
+          a.onclick=()=>openRefModal(n);
+          frag.appendChild(a);
+          const afterNode=document.createTextNode(after);
+          frag.appendChild(afterNode);
+          node.parentNode.replaceChild(frag,node);
+          walk(afterNode);
+          return;
+        }
+      }
+    } else if(node.nodeType===1 && node.tagName!=='SCRIPT' && !node.classList.contains('ref-link')){
+      [...node.childNodes].forEach(walk);
+    }
+  };
+  walk(root);
+}
+setTimeout(()=>{
+  document.querySelectorAll('.style-card, td.exp, .style-ref').forEach(el=>linkRefs(el));
+}, 150);
+
 </script>
 </body>
 </html>
