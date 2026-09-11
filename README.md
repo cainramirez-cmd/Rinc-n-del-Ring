@@ -57,8 +57,8 @@ Pensado para desplegarse en [Vercel](https://rincon-del-ring.vercel.app/) como s
 
 ### Interactividad y experiencia
 - **Quiz de reconocimiento:** trayectoria sin nombre; hay que identificar el golpe; botón para repetir la animación antes de responder.
-- **Mini perfiles de referentes:** clic en nombres (Ali, Frazier, Tyson, Mayweather, Chávez, Robinson, Hearns, Inoue, Durán, Cus D’Amato, Steward…) abre un panel con contexto de estilo y pelea sugerida.
-- **Atmósfera de ring:** tipografía Anton / Oswald / Inter, divisores tipo cuerda, vignette e iluminación sutil de cuadrilátero.
+- **Mini perfiles de referentes:** clic en nombres (Ali, Frazier, Tyson, Mayweather, Chávez, Robinson, Hearns, Inoue, Durán, Cus D'Amato, Steward…) abre un panel con contexto de estilo y pelea sugerida.
+- **Atmósfera de ring:** identidad tipográfica de dos capas — el isotipo y el wordmark («Rincón del Ring») se mantienen fijos en Anton, mientras que el resto del sitio combina una geométrica de titulares, una técnica para labels y una serif editorial para el cuerpo de texto, con acentos monoespaciados en las fichas tipo «expediente» (ver [Tecnologías](#tecnologías)); divisores tipo cuerda, vignette, textura de grano e iluminación sutil de cuadrilátero.
 - **100% responsive** y respeta `prefers-reduced-motion`.
 - **CTA a Substack** (*Rincón del Ring*) para análisis y crónica en texto.
 
@@ -91,7 +91,12 @@ rincon-del-ring/
 - HTML5 + CSS3 (variables CSS, grid, clamp para tipografía fluida, vignette de atmósfera)
 - JavaScript vanilla (sin frameworks ni dependencias de build)
 - SVG dibujado a mano para el diagrama de trayectorias y zonas de impacto
-- Tipografías [Anton](https://fonts.google.com/specimen/Anton), [Oswald](https://fonts.google.com/specimen/Oswald) e [Inter](https://fonts.google.com/specimen/Inter) vía Google Fonts
+- Tipografías vía Google Fonts, separadas por rol:
+  - [Anton](https://fonts.google.com/specimen/Anton) — reservada exclusivamente al isotipo y al wordmark del logo, sin usarse en el resto del sitio.
+  - [Unbounded](https://fonts.google.com/specimen/Unbounded) — titulares (h1–h3, números destacados, badges).
+  - [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) — labels, navegación, botones y eyebrows.
+  - [Literata](https://fonts.google.com/specimen/Literata) — cuerpo de texto.
+  - [Space Mono](https://fonts.google.com/specimen/Space+Mono) — etiquetas tipo «ficha»/expediente (ticket, zonas, tags de variantes).
 
 
 ## Nota
