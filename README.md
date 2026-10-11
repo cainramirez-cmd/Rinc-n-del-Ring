@@ -89,4 +89,4 @@ Distribuido bajo licencia [MIT](./LICENSE).
 
 ---
 
-© 2026 [Caín N. Ramirez](https://github.com/cainramirez-cmd)
+© 2026 [Caín Ramirez-De Luca](https://github.com/cainramirez-cmd)
