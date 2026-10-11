@@ -1341,4 +1341,86 @@ const FIGHTS = [
   {names:"Frazier vs. Ali I", meta:"Nueva York, 1971", why:"El gancho adelantado de Frazier como herramienta de presión sistemática. Bob and weave + left hook; referencia para el round de defensa y el arquetipo swarmer."},
   {names:"Durán vs. Leonard I", meta:"Montreal, 1980", why:"Infighting, trabajo de cuerpo y cómo un out-fighter se ve obligado a pelear en el rango que no eligió. Cruce de arquetipos."},
   {names:"Hearns vs. Leonard I", meta:"Las Vegas, 1981", why:"Jab de alcance Kronk vs. boxeo completo. El cross y el jab largo de Hearns; el ajuste de Leonard a mitad de pelea."},
-  {names:"Tyson vs. Spinks", meta:"Nueva Jersey, 1988", why:"Peek-a-boo en versión corta: entrada, uppercuts y el cierre en un round. Ver cadena cinét
+  {names:"Tyson vs. Spinks", meta:"Nueva Jersey, 1988", why:"Peek-a-boo en versión corta: entrada, uppercuts y el cierre en un round. Ver cadena cinética y distancia corta."},
+  {names:"Chávez vs. Taylor I", meta:"Las Vegas, 1990", why:"Presión mexicana, hígado y últimos segundos. El body work acumulado y la lectura de un round que se decide al final."},
+  {names:"Mayweather vs. Hatton", meta:"Las Vegas, 2007", why:"Shoulder roll, contragolpe y check hook. Defensa que se convierte en ofensiva en el mismo instante."},
+  {names:"Pacquiao vs. Barrera I", meta:"San Antonio, 2003", why:"Ángulos, volumen y cambio de guardia. Ritmo irregular y ataques desde líneas no convencionales como variable de desgaste."},
+  {names:"Inoue vs. Donaire II", meta:"Saitama, 2018", why:"Volumen técnico a alta intensidad: jab, body, precisión bajo fuego. Estilo japonés moderno en su mejor versión."},
+  {names:"Usyk vs. Joshua II", meta:"Arabia Saudita, 2022", why:"Ring generalship, jab de control y cómo un surdo (southpaw) administra distancia ante un ortodoxo de poder."}
+];
+
+const fl=document.getElementById('fightList');
+if(fl){
+  FIGHTS.forEach(f=>{
+    const el=document.createElement('div');
+    el.className='fight-item';
+    el.innerHTML='<div><div class="fight-names">'+f.names+'</div><div class="fight-meta">'+f.meta+'</div></div><p class="fight-why">'+f.why+'</p>';
+    fl.appendChild(el);
+  });
+}
+
+/* ============ REFERENT MINI-PROFILES ============ */
+const REFERENTS = {
+  "Muhammad Ali":{tag:"Out-fighter · pesado", body:"Reformuló el movimiento en el peso pesado: jab, footwork y una postura activa que contradecía el canon defensivo de su época. La distancia y el timing como variables primarias sobre el poder bruto — su aporte al análisis del estilista sigue siendo el punto de referencia.", fight:"Estudiar: Ali–Foreman (1974) y Ali–Frazier I (1971)."},
+  "Joe Frazier":{tag:"Swarmer · gancho adelantado", body:"Presión constante, bob and weave y un gancho adelantado desarrollado como herramienta de acumulación. El plan de pelea era siempre el mismo: cerrar distancia, castigo al cuerpo y subir a la cabeza. La repetición del esquema, no la variación, era su ventaja.", fight:"Estudiar: Frazier–Ali I (1971)."},
+  "Mike Tyson":{tag:"Peek-a-boo · uppercuts", body:"Bajo el sistema de D'Amato: guardia alta, desplazamiento de cabeza constante y finalizaciones en corta-media distancia. El sistema peek-a-boo integra defensa y ataque en un mismo gesto motor, lo que reduce el tiempo de transición entre recibir y responder.", fight:"Estudiar: Tyson–Spinks (1988) y combates de título 1986–1988."},
+  "Floyd Mayweather Jr.":{tag:"Counter · shoulder roll", body:"Shoulder roll, lectura anticipatoria y economía de movimiento. El criterio de pelea era reducir el daño recibido al mínimo y capitalizar el espacio que el rival abre al atacar. Referente del contragolpe desde la defensa de hombro llevado a nivel de sistema.", fight:"Estudiar: Mayweather–Hatton (2007)."},
+  "Julio César Chávez":{tag:"Body snatcher · presión", body:"Presión hacia adelante, castigo sistemático al hígado y alta tolerancia al intercambio. El cuerpo como objetivo prioritario no era una preferencia estilística: era la consecuencia lógica de una contextura corta y una capacidad aeróbica que le permitía sostener el ritmo sin depender del nocaut temprano.", fight:"Estudiar: Chávez–Taylor I (1990)."},
+  "Sugar Ray Robinson":{tag:"Boxer-puncher · completo", body:"Amplio rango de recursos técnicos: jab, gancho, movilidad y capacidad de nocaut. Su frecuencia de aparición en los análisis de referencia libra por libra se explica por la baja cantidad de variables que dejaba expuestas a lo largo de un combate.", fight:"Estudiar: el KO a Fullmer (1957) como referencia de ejecución del gancho."},
+  "Thomas Hearns":{tag:"Kronk · jab y cross", body:"Envergadura larga, jab agresivo y cross de alto impacto. Producto del sistema Kronk: ofensiva estructurada desde distancia larga, sin buscar la corta distancia que anularía su ventaja de alcance.", fight:"Estudiar: Hearns–Leonard I (1981)."},
+  "Naoya Inoue":{tag:"Volumen técnico · moderno", body:"Base ortodoxa precisa, alto volumen de golpes y ataque al cuerpo sostenido sin perder estructura defensiva. Exponente actual del nivel técnico de la escuela japonesa en categorías bajas.", fight:"Estudiar: Inoue–Donaire II (2018)."},
+  "Roberto Durán":{tag:"Infighting · manos de piedra", body:"Velocidad de manos en corta distancia y presión para arrastrar al rival al rango en que su alcance deja de ser ventaja. Durán–Leonard I (1980) es un caso de análisis de cómo un swarmer puede condicionar tácticamente a un estilista.", fight:"Estudiar: Durán–Leonard I (1980)."},
+  "Cus D'Amato":{tag:"Entrenador · peek-a-boo", body:"Sistema defensivo-ofensivo integrado: guardia alta, movimiento de cabeza anticipatorio y trabajo desde las piernas. Psicología del rendimiento como componente central del entrenamiento. Formó a Patterson, Torres y Tyson; el peek-a-boo sigue siendo un sistema enseñado activamente.", fight:"Se estudia en los combates de Patterson, Torres y Tyson."},
+  "Emanuel Steward":{tag:"Entrenador · Kronk", body:"Jab como golpe de construcción, sparring de alta intensidad y potencia como resultado de la técnica, no como objetivo aislado. El Kronk de Detroit produjo campeones en distintas categorías con un patrón reconocible: distancia larga, jab y recto de poder.", fight:"Se ve en Hearns, Lewis y la segunda etapa de Klitschko."}
+};
+
+function openRefModal(name){
+  const r=REFERENTS[name];
+  if(!r) return;
+  document.getElementById('refModalTag').textContent=r.tag;
+  document.getElementById('refModalName').textContent=name;
+  document.getElementById('refModalBody').textContent=r.body;
+  document.getElementById('refModalFight').textContent=r.fight;
+  document.getElementById('refModalBg').classList.add('open');
+}
+function closeRefModal(){ document.getElementById('refModalBg').classList.remove('open'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeRefModal(); });
+
+function linkRefs(root){
+  if(!root) return;
+  const names=Object.keys(REFERENTS).sort((a,b)=>b.length-a.length);
+  const walk=node=>{
+    if(node.nodeType===3){
+      let text=node.nodeValue;
+      for(const n of names){
+        const idx=text.indexOf(n);
+        if(idx!==-1){
+          const before=text.slice(0,idx);
+          const after=text.slice(idx+n.length);
+          const frag=document.createDocumentFragment();
+          if(before) frag.appendChild(document.createTextNode(before));
+          const a=document.createElement('span');
+          a.className='ref-link';
+          a.textContent=n;
+          a.onclick=()=>openRefModal(n);
+          frag.appendChild(a);
+          const afterNode=document.createTextNode(after);
+          frag.appendChild(afterNode);
+          node.parentNode.replaceChild(frag,node);
+          walk(afterNode);
+          return;
+        }
+      }
+    } else if(node.nodeType===1 && node.tagName!=='SCRIPT' && !node.classList.contains('ref-link')){
+      [...node.childNodes].forEach(walk);
+    }
+  };
+  walk(root);
+}
+setTimeout(()=>{
+  document.querySelectorAll('.style-card, td.exp, .style-ref').forEach(el=>linkRefs(el));
+}, 150);
+
+</script>
+</body>
+</html>
