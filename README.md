@@ -2,7 +2,7 @@
 
 **Manual visual e interactivo de los golpes fundamentales del boxeo.** Una sola página HTML, sin dependencias ni build, pensada para enseñar a identificar cada golpe por su trayectoria, su mecánica y la zona real del cuerpo donde impacta — y también a leer táctica, escuelas, defensa y el cuerpo bajo fuego.
 
-> Diagrama animado de un boxeador frente a una silueta de práctica, fichas técnicas de los 6 golpes de la numeración oficial, cues de entrenadores, escenarios tácticos, biología del impacto, tablas comparativas, glosario, quiz de reconocimiento y una lista de peleas para estudiar.
+> Fichas técnicas de los 6 golpes de la numeración oficial, cues de entrenadores, biología del impacto, tablas comparativas, glosario y una lista de peleas para estudiar.
 
 
 ## Deploy
@@ -12,13 +12,13 @@ Pensado para desplegarse en [Vercel](https://rincon-del-ring.vercel.app/) como s
 
 ## Características
 
-### Fundamentos y diagrama
+### Fundamentos
 - **Sistema de numeración (1–6):** jab, cross, gancho adelantado, gancho trasero, uppercut adelantado y uppercut trasero, tal como se enseñan y se gritan en cualquier gimnasio.
 - **Cadena cinética y checklist de guardia:** pie → cadera → torso → puño, más los puntos de postura que se revisan en el rincón.
 
 ### Fichas técnicas de cada golpe
-- **Modo golpe individual:** biomecánica, uso táctico, cómo combina, cómo contrarrestarlo, defensa habitual.
-- **Errores en texto:** no solo el nombre del error, sino *cómo se ve* en el gimnasio (hombro que baja, codo que se abre, jab que empuja en vez de latigear).
+- **Ficha por golpe:** biomecánica, uso táctico, defensa y contragolpe, y la zona donde impacta.
+- **Cues de entrenadores:** indicaciones cortas de gimnasio para ejecutar cada golpe (codo a 90°, pivotar el talón, recuperar la guardia).
 
 ### Arsenal y defensa
 - **Variantes y golpes especiales:** jab doble, jab de cuerpo, push jab, overhand, cross de contra, check hook, gancho al hígado, shovel hook, bolo punch, uppercut en clinch.
@@ -35,7 +35,7 @@ Pensado para desplegarse en [Vercel](https://rincon-del-ring.vercel.app/) como s
 - **Lo que el ring le pide al organismo:** cadena cinética, fatiga y precisión, visión y fijación, equilibrio y base.
 
 ### Escuelas, arquetipos y reglas
-- **Escuelas regionales:** Philly shoulder roll, Kronk, peek-a-boo; cubana, mexicana, puertorriqueña, británica/europea, soviética/del Este, filipina, japonesa — con referentes y contexto.
+- **Escuelas regionales:** Philly shoulder roll, Kronk, peek-a-boo; cubana, mexicana, británica/europea, soviética/del Este, filipina, japonesa — con referentes y contexto.
 - **Cinco arquetipos:** boxer-puncher, swarmer, out-fighter, counter-puncher, slugger.
 - **Reglamento:** duración de rounds, sistema 10-point must, qué mira un juez.
 - **Amateur vs. profesional:** comparación en dos columnas (ritmo, puntuación, protección, prioridades).
@@ -76,7 +76,6 @@ rincon-del-ring/
 
 - HTML5 + CSS3 (variables CSS, grid, clamp para tipografía fluida, vignette de atmósfera)
 - JavaScript vanilla (sin frameworks ni dependencias de build)
-- SVG dibujado a mano para el diagrama de trayectorias y zonas de impacto
 
 ## Nota
 
